@@ -9,10 +9,12 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const _ = require("lodash");
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
-const indexRouter = require('./controllers/index');
+const homeRouter = require('./controllers/home');
+const citeRouter = require('./controllers/cite-us');
+const searchRouter = require('./controllers/search');
+
 //const species = require('./controllers/speciesController'); //keliaus i routes.js
 const app = express();
-
 
 app.set('view engine', 'ejs');
 
@@ -21,7 +23,10 @@ app.use(express.static("uploads"));
 app.use(express.static("models"));
 app.use(express.static("assets"));
 // app.use(express.static("controllers"));
-app.use("/", indexRouter);
+
+app.use("/", homeRouter);
+app.use("/cite-us", citeRouter);
+app.use("/search", searchRouter);
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -73,10 +78,6 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.get("/cite-us", (req, res) => {
-  res.render("cite-us");
-});
-
 app.get("/logout", function(req, res) {
   req.logout();
   res.redirect('/');
@@ -86,168 +87,55 @@ app.get("/logout", function(req, res) {
 app.get("/search-page", (req, res) => {
   res.render("search");
 });
-
-//-----------PAIESKA---------
-app.get("/search", function(req, res) {
-
-  let typedSpecies = _.toLower(req.query.dspecies);
-
-  let selectedHostPlantFamily = req.query.dhostplantfamily;
-  let selectedForewing = req.query.dforewing;
-  let selectedTegumen = req.query.dtegumen;
-  let selectedUncus = req.query.duncus;
-  let selectedGnathos = req.query.dgnathos;
-  let selectedValva = req.query.dvalva;
-  let selectedJuxta = req.query.djuxta;
-  let selectedTranstilla = req.query.dtranstilla;
-  let selectedVinculum = req.query.dvinculum;
-  let selectedPhallusWithoutCarinae = req.query.dphalluswithoutcarinae;
-  let selectedPhallusWithCarinae = req.query.dphalluswithcarinae;
-
-  if (req.query.dspecies == "") {
-    typedSpecies = {
-      $ne: null
-    };
-  }
-  if (req.query.dhostplantfamily == "null") {
-    selectedHostPlantFamily = {
-      $ne: null
-    };
-  }
-  if (req.query.dforewing == "null") {
-    selectedForewing = {
-      $ne: null
-    };
-  }
-  if (req.query.dtegumen == "null") {
-    selectedTegumen = {
-      $ne: null
-    };
-  }
-  if (req.query.duncus == "null") {
-    selectedUncus = {
-      $ne: null
-    };
-  }
-  if (req.query.dgnathos == "null") {
-    selectedGnathos = {
-      $ne: null
-    };
-  }
-  if (req.query.dvalva == "null") {
-    selectedValva = {
-      $ne: null
-    };
-  }
-  if (req.query.djuxta == "null") {
-    selectedJuxta = {
-      $ne: null
-    };
-  }
-  if (req.query.dtranstilla == "null") {
-    selectedTranstilla = {
-      $ne: null
-    };
-  }
-  if (req.query.dvinculum == "null") {
-    selectedVinculum = {
-      $ne: null
-    };
-  }
-  if (req.query.dphalluswithoutcarinae == "null") {
-    selectedPhallusWithoutCarinae = {
-      $ne: null
-    };
-  }
-  if (req.query.dphalluswithcarinae == "null") {
-    selectedPhallusWithCarinae = {
-      $ne: null
-    };
-  }
-
-  Nepti.find({
-    species: typedSpecies,
-    hostplantfamily: selectedHostPlantFamily,
-    forewing: selectedForewing,
-    tegumen: selectedTegumen,
-    uncus: selectedUncus,
-    gnathos: selectedGnathos,
-    valva: selectedValva,
-    juxta: selectedJuxta,
-    transtilla: selectedTranstilla,
-    vinculum: selectedVinculum,
-    phalluswithoutcarinae: selectedPhallusWithoutCarinae,
-    phalluswithcarinae: selectedPhallusWithCarinae
-  }, function(err, neptis) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies +
-        " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
-        selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +
-        selectedUncus + " and selectedGnathos: " + selectedGnathos + " and selectedValva: " +
-        selectedValva + " and selectedJuxta: " + selectedJuxta + " and selectedTranstilla: " +
-        selectedTranstilla + " and selectedVinculum: " + selectedVinculum +
-        " and selectedPhallusWithoutCarinae: " + selectedPhallusWithoutCarinae +
-        " and selectedPhallusWithCarinae: " + selectedPhallusWithCarinae);
-
-      res.render("results", {
-        neptis: neptis
-      });
-    }
-  });
-
-});
+//---------------------------------
 
 app.get("/create", (req, res) => {
 
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     res.render("create");
   } else {
     res.redirect("/login");
   }
-
 });
 
 app.get("/edit", (req, res) => {
 
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
 
-  Nepti.find({}, function(err, neptis) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("edit", {
-        neptis: neptis
-      });
-    }
-  });
+    Nepti.find({}, function(err, neptis) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("edit", {
+          neptis: neptis
+        });
+      }
+    });
 
-} else {
-  res.redirect("/login");
-}
-
+  } else {
+    res.redirect("/login");
+  }
 });
 
 
 //------------Randu ir isvedu visus irasus esancius DB--------
 app.get("/database", (req, res) => {
 
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
 
-  Nepti.find({}, function(err, neptis) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("database", {
-        neptis: neptis
-      });
-    }
-  });
+    Nepti.find({}, function(err, neptis) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("database", {
+          neptis: neptis
+        });
+      }
+    });
 
-} else {
-  res.redirect("/login");
-}
+  } else {
+    res.redirect("/login");
+  }
 
 });
 
