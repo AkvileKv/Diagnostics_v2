@@ -1,0 +1,36 @@
+<%- include('partials/header2') %>
+<%- include('partials/admin-header') %>
+
+<div class="container">
+  <div class="jumbotron centered">
+
+    <i class="fas fa-poll fa-6x"></i>
+    <h1 class="display-3">Create a new record</h1>
+    <p class="records-text">NeptiDB</p>
+
+    <form action="/create" method="post">
+
+  <div class="form-group">
+    <input type="text" class="form-control text-center" name="region" placeholder="region" required>
+    <input type="text" class="form-control text-center" name="species" placeholder="species" required>
+    <input type="text" class="form-control text-center" name="hostplantfamily" placeholder="hostplant family" required>
+    <input type="text" class="form-control text-center" name="forewing" placeholder="forewing" required>
+    <input type="text" class="form-control text-center" name="tegumen" placeholder="tegumen" required>
+    <input type="text" class="form-control text-center" name="uncus" placeholder="uncus" required>
+    <input type="text" class="form-control text-center" name="gnathos" placeholder="gnathos" required>
+    <input type="text" class="form-control text-center" name="valva" placeholder="valva" required>
+    <input type="text" class="form-control text-center" name="juxta" placeholder="juxta" required>
+    <input type="text" class="form-control text-center" name="transtilla" placeholder="transtilla" required>
+    <input type="text" class="form-control text-center" name="vinculum" placeholder="vinculum" required>
+    <input type="text" class="form-control text-center" name="phalluswithoutcarinae" placeholder="phallus without carinae">
+    <input type="text" class="form-control text-center" name="phalluswithcarinae" placeholder="phallus with carinae">
+    <input type="text" class="form-control text-center" name="filepath" placeholder="file path" required>
+  </div>
+  <button type="submit" class="btn yellow-button w-100">CREATE</button>
+</form>
+
+  </div>
+</div>
+
+
+<%- include('partials/footer') %>

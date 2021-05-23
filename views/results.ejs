@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<!-- Title -->
+<section class="blue-section" id="title">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blue-space-search">
+          <h1>LEAF-MINING NEPTICULIDAE OF CENTRAL ASIA</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- empty space-->
+<section id="results-found" class="clear-section">
+  <div class="container-fluid">
+    <div class="empty-space3">
+      <%if (neptis.length === 1) { %>
+      <p class="found"><%=neptis.length%> result found</p>
+      <% } else if (neptis.length > 1) { %>
+      <p class="found"><%=neptis.length%> results found</p>
+      <% } else { %>
+      <p class="found">Sorry - no records found. Please try again.</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<div class="jumbotron text-center">
+  <div class="container">
+
+    <%if (neptis.length > 0) { %>
+    <%  neptis.forEach(function(nepti){ %>
+    <img class="results-img" src="<%=nepti.filepath%>" alt="<%=nepti.species%>">
+    <p></p>
+    <% }) %>
+    <% } else { %>
+      <div class="circle-button">
+        <a class="btn circle-big" href="/search-page" role="button">BACK TO SEARCH</a>
+      </div>
+    <% } %>
+
+
+  </div>
+</div>
+
+<%if (neptis.length > 0) { %>
+  <div class="circle-button">
+    <a class="btn circle" href="/search-page" role="button">BACK TO SEARCH</a>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>
