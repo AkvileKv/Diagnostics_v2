@@ -5,17 +5,18 @@
   <div class="jumbotron text-center">
 
     <i class="fas fa-edit fa-6x"></i>
-    <h1 class="display-3">Edit records</h1>
+    <h1 class="display-3">Edit</h1>
     <p class="records-text">NeptiDB</p>
 
     <%  neptis.forEach(function(nepti){ %>
 
-      <p class="database-result"><span class="bold">Species:</span> <%=nepti.species%></p>
+      <p class="database-result">
+        <%=nepti.species%>
+        <a href="/<%= nepti._id %>">Edit</a>
+      </p>
 
       <% }) %>
   </div>
 </div>
-
-
 
 <%- include("partials/footer"); -%>

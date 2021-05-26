@@ -18,6 +18,6 @@ const neptiSchema = new Schema({
   filepath: String
 });
 
-const Nepti = new mongoose.model("Nepti", neptiSchema);
+const Nepti = mongoose.model("Nepti", neptiSchema);
 
 module.exports = Nepti;

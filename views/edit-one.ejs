@@ -1,0 +1,69 @@
+<%- include("partials/header2"); -%>
+<%- include("partials/admin-header"); -%>
+
+
+<div class="jumbotron text-center">
+  <div class="container">
+
+    <form action="/update" method="post">
+
+      <div class="form-group">
+        <i class="fas fa-pen-square fa-6x"></i>
+        <h1 class="display-3">Edit record</h1>
+        <p class="records-text"><%=nepti.species%></p>
+
+        <p class="database-result"><span class="bold">Id:</span>
+          <input type="text" class="form-control  database-result" name="id" value="<%=nepti._id%>">
+        </p>
+        <p class="database-result"><span class="bold">Region:</span>
+          <input type="text" class="form-control  database-result" name="region" value="<%=nepti.region%>">
+        </p>
+        <p class="database-result"><span class="bold">Species:</span>
+          <input type="text" class="form-control database-result" name="species" value="<%=nepti.species%>">
+        </p>
+        <p class="database-result"><span class="bold">Hostplant family:</span>
+          <input type="text" class="form-control database-result" name="hostplantfamily" value="<%=nepti.hostplantfamily%>">
+        </p>
+        <p class="database-result"><span class="bold">Forewing:</span>
+          <input type="text" class="form-control database-result" name="forewing" value="<%=nepti.forewing%>">
+        </p>
+        <p class="database-result"><span class="bold">Tegumen:</span>
+          <input type="text" class="form-control database-result" name="tegumen" value="<%=nepti.tegumen%>">
+        </p>
+        <p class="database-result"><span class="bold">Uncus:</span>
+          <input type="text" class="form-control database-result" name="uncus" value="<%=nepti.uncus%>">
+        </p>
+        <p class="database-result"><span class="bold">Gnathos:</span>
+          <input type="text" class="form-control database-result" name="gnathos" value="<%=nepti.gnathos%>">
+        </p>
+        <p class="database-result"><span class="bold">Valva:</span>
+          <input type="text" class="form-control   database-result" name="valva" value="<%=nepti.valva%>">
+        </p>
+        <p class="database-result"><span class="bold">Juxta: </span>
+          <input type="text" class="form-control database-result" name="juxta" value="<%=nepti.juxta%>">
+        </p>
+        <p class="database-result"><span class="bold">Transtilla:</span>
+          <input type="text" class="form-control database-result" name="transtilla" value="<%=nepti.transtilla%>">
+        </p>
+        <p class="database-result"><span class="bold">Vinculum:</span>
+          <input type="text" class="form-control database-result" name="vinculum" value="<%=nepti.vinculum%>">
+        </p>
+        <p class="database-result"><span class="bold">Phallus without Carinae:</span>
+          <input type="text" class="form-control   database-result" name="phalluswithoutcarinaen" value="<%=nepti.phalluswithoutcarinae%>">
+        </p>
+        <p class="database-result"><span class="bold">Phallus with Carinae:</span>
+          <input type="text" class="form-control database-result" name="phalluswithcarinae" value="<%=nepti.phalluswithcarinae%>">
+        </p>
+        <p class="database-result"><span class="bold">Image URL:</span>
+          <input type="text" class="form-control database-result" name="filepath" value="<%=nepti.filepath%>">
+        </p>
+      </div>
+      <a href="/edit">Cancel</a>
+      <button type="submit" class="btn yellow-button w-100">UPDATE</button>
+    </form>
+
+  </div>
+</div>
+
+
+<%- include('partials/footer') %>
