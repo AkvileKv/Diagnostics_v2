@@ -10,10 +10,19 @@
 
     <%  neptis.forEach(function(nepti){ %>
 
-      <p class="database-result">
+      <div class="database-result">
         <%=nepti.species%>
         <a href="/<%= nepti._id %>">Edit</a>
-      </p>
+
+        <form action="/delete" method="post">
+            <button class="btn-dark btn-sm" type="submit" name="deleteById" onclick="return confirm('Are you sure you want to delete this record?');" value="<%=nepti._id%>">Delete</button>
+        </form>
+
+      </div>
+
+
+
+
 
       <% }) %>
   </div>

@@ -9,6 +9,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const _ = require("lodash");
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
+
 const homeRouter = require('./controllers/home');
 const citeRouter = require('./controllers/cite-us');
 const searchRouter = require('./controllers/search');
@@ -121,7 +122,7 @@ app.get("/create", (req, res) => {
 
 app.get("/edit", (req, res) => {
 
-if (req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
 
     Nepti.find({}, function(err, neptis) {
       if (err) {
@@ -138,22 +139,36 @@ if (req.isAuthenticated()) {
   }
 });
 
+app.post("/delete", function(req, res) {
+
+  Nepti.deleteOne({
+      _id: req.body.deleteById
+    },
+    function(err) {
+      if (!err) {
+        res.redirect("/database");
+      } else {
+        res.send(err);
+      }
+    }
+  );
+});
+
 app.get("/:neptiId", (req, res) => {
 
   if (req.isAuthenticated()) {
 
-      const requestedId = req.params.neptiId;
+    const requestedId = req.params.neptiId;
 
-    Nepti.findById((requestedId
-    ), function(err, nepti) {
+    Nepti.findById((requestedId), function(err, nepti) {
 
       if (err) {
-         console.log(err);
+        console.log(err);
       } else {
-      res.render("edit-one", {
-        nepti: nepti
-      });
-    }
+        res.render("edit-one", {
+          nepti: nepti
+        });
+      }
     });
   } else {
     res.redirect("/login");
@@ -209,67 +224,37 @@ app.post("/create", (req, res) => {
 
 app.post("/update", (req, res) => {
 
-//const selectedSpecies = req.query.dspecies;
-
-    Nepti.findOneAndUpdate({
-      _id : req.body.id},
-       { $set: {
-      region: req.body.region,
-      species: req.body.species,
-      hostplantfamily: req.body.hostplantfamily,
-      forewing: req.body.forewing,
-      tegumen: req.body.tegumen,
-      uncus: req.body.uncus,
-      gnathos: req.body.gnathos,
-      valva: req.body.valva,
-      juxta: req.body.juxta,
-      transtilla: req.body.transtilla,
-      vinculum: req.body.vinculum,
-      phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-      phalluswithcarinae: req.body.phalluswithcarinae,
-      filepath: req.body.filepath
-    }
-  },
+  Nepti.findOneAndUpdate({
+      _id: req.body.id
+    }, {
+      $set: {
+        region: req.body.region,
+        species: req.body.species,
+        hostplantfamily: req.body.hostplantfamily,
+        forewing: req.body.forewing,
+        tegumen: req.body.tegumen,
+        uncus: req.body.uncus,
+        gnathos: req.body.gnathos,
+        valva: req.body.valva,
+        juxta: req.body.juxta,
+        transtilla: req.body.transtilla,
+        vinculum: req.body.vinculum,
+        phalluswithoutcarinae: req.body.phalluswithoutcarinae,
+        phalluswithcarinae: req.body.phalluswithcarinae,
+        filepath: req.body.filepath
+      }
+    },
     function(err) {
       if (err) {
-         console.log(err);
+        console.log(err);
       } else {
-            console.log("Succesfully updated item");
-            console.log(req.body.region);
-      res.redirect("/database");
-        }
+        console.log("Succesfully updated item");
+        console.log(req.body.region);
+        res.redirect("/database");
+      }
     }
   );
-  });
-
-//   const nepti = new Nepti({
-//     region: req.body.region,
-//     species: req.body.species,
-//     hostplantfamily: req.body.hostplantfamily,
-//     forewing: req.body.forewing,
-//     tegumen: req.body.tegumen,
-//     uncus: req.body.uncus,
-//     gnathos: req.body.gnathos,
-//     valva: req.body.valva,
-//     juxta: req.body.juxta,
-//     transtilla: req.body.transtilla,
-//     vinculum: req.body.vinculum,
-//     phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-//     phalluswithcarinae: req.body.phalluswithcarinae,
-//     filepath: req.body.filepath
-//   });
-//   // issaugau nauja irasa kolekcijoje
-//   nepti.save(function(err) {
-//     if (!err) {
-//       console.log("Succesfully created item");
-//       res.redirect("/database");
-//     }
-//   });
-// });
-
-
-
-
+});
 
 app.use('*', (req, res) => {
   res.render("404");

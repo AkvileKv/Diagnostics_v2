@@ -1,7 +1,7 @@
 <%- include("partials/header2"); -%>
 <%- include("partials/admin-header"); -%>
 
-<div class="container">
+<div class="container" id="begin">
   <div class="jumbotron text-center">
 
     <i class="fas fa-database fa-6x"></i>
@@ -31,7 +31,11 @@
   </div>
 </div>
 
-
+<%if (neptis.length > 0) { %>
+<div class="circle-button">
+  <a class="btn circle" href="#begin" role="button">BACK TO BEGIN</a>
+</div>
+<% } %>
 
 
 
