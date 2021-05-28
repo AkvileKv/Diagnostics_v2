@@ -13,7 +13,9 @@ const User = require('./models/user');
 const homeRouter = require('./controllers/home');
 const citeRouter = require('./controllers/cite-us');
 const searchRouter = require('./controllers/search');
-// const editOneRouter = require('./controllers/edit-one');
+const loginRouter = require('./controllers/login');
+const registerRouter = require('./controllers/register');
+// const databaseRouter = require('./controllers/database');
 
 const app = express();
 
@@ -23,12 +25,13 @@ app.use(express.static("public"));
 app.use(express.static("uploads"));
 app.use(express.static("models"));
 app.use(express.static("assets"));
-// app.use(express.static("controllers"));
 
 app.use("/", homeRouter);
 app.use("/cite-us", citeRouter);
 app.use("/search", searchRouter);
-// app.use("/edit-one", searchRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
+// app.use("/database", databaseRouter);
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -53,16 +56,6 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
 
 app.post("/register", (req, res) => {
 
@@ -94,7 +87,6 @@ app.get("/search-page", (req, res) => {
 app.get("/database", (req, res) => {
 
   if (req.isAuthenticated()) {
-
     Nepti.find({}, function(err, neptis) {
       if (err) {
       console.log(err);
@@ -105,11 +97,9 @@ app.get("/database", (req, res) => {
         });
       }
     });
-
   } else {
     res.redirect("/login");
   }
-
 });
 
 app.get("/create", (req, res) => {
@@ -124,7 +114,6 @@ app.get("/create", (req, res) => {
 app.get("/edit", (req, res) => {
 
   if (req.isAuthenticated()) {
-
     Nepti.find({}, function(err, neptis) {
       if (err) {
         console.log(err);
@@ -134,7 +123,6 @@ app.get("/edit", (req, res) => {
         });
       }
     });
-
   } else {
     res.redirect("/login");
   }
@@ -158,11 +146,8 @@ app.post("/delete", function(req, res) {
 app.get("/:neptiId", (req, res) => {
 
   if (req.isAuthenticated()) {
-
     const requestedId = req.params.neptiId;
-
     Nepti.findById((requestedId), function(err, nepti) {
-
       if (err) {
         console.log(err);
       } else {
@@ -182,7 +167,6 @@ app.post("/login", (req, res) => {
     username: req.body.username,
     password: req.body.password
   });
-
   // to log in and authenticate it. Method comes from passport
   req.login(user, function(err) {
     if (err) {
@@ -262,5 +246,5 @@ app.use('*', (req, res) => {
 });
 
 app.listen(3000, function() {
-  console.log("App has started successfully");
+  console.log("Diagnostics App has started successfully");
 });
