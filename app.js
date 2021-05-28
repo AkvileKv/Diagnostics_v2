@@ -97,8 +97,9 @@ app.get("/database", (req, res) => {
 
     Nepti.find({}, function(err, neptis) {
       if (err) {
-        console.log(err);
+      console.log(err);
       } else {
+        console.log("Turi isvesti rezultatus");
         res.render("database", {
           neptis: neptis
         });
@@ -261,5 +262,5 @@ app.use('*', (req, res) => {
 });
 
 app.listen(3000, function() {
-  console.log("app has started successfully");
+  console.log("App has started successfully");
 });

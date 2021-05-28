@@ -423,6 +423,29 @@ input:focus::-webkit-input-placeholder {
   text-align: left;
 }
 
+/* EDIT PPAGE */
+
+#group .btn {
+  /* background: inherit; */
+  font-weight: normal;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 5px;
+  color:  #000;
+  padding: 1px 20px 1px 20px;
+  text-decoration: none;
+  font-size: 100%;
+  margin: 5px;
+}
+
+.database-result-edit {
+  text-align: right;
+}
+
+.edit-left {
+  float: left;
+}
+
 /*----------------------------------- OLD*/
 .records-text {
   text-align: center;
