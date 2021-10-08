@@ -15,6 +15,8 @@ const citeRouter = require('./controllers/cite-us');
 const searchRouter = require('./controllers/search');
 const loginRouter = require('./controllers/login');
 const registerRouter = require('./controllers/register');
+const notFund404Router = require('./controllers/404');
+const notFund404_userRouter = require('./controllers/404-user');
 // const databaseRouter = require('./controllers/database');
 
 const app = express();
@@ -31,6 +33,8 @@ app.use("/cite-us", citeRouter);
 app.use("/search", searchRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/404", notFund404Router);
+app.use("/404-user", notFund404_userRouter);
 // app.use("/database", databaseRouter);
 
 app.use(bodyParser.urlencoded({
@@ -59,18 +63,38 @@ passport.deserializeUser(User.deserializeUser());
 
 app.post("/register", (req, res) => {
 
-  User.register({
+  User.findOne({
     username: req.body.username
-  }, req.body.password, function(err, user) {
+  }, function(err, user) {
     if (err) {
       console.log(err);
+    }
+    var message;
+    if (user) {
+      console.log(user);
+      message = "User exists";
+      console.log(message);
       res.redirect("/register");
     } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/database");
+      // console.log(user);
+      //   message= "user doesn't exist";
+      //   console.log(message);
+      User.register({
+        username: req.body.username
+      }, req.body.password, function(err, user) {
+        if (err) {
+          console.log(err);
+          res.redirect("/register");
+        } else {
+          passport.authenticate("local")(req, res, function() {
+            res.redirect("/database");
+          }, );
+        }
       });
     }
+    // res.json({message: message});
   });
+
 });
 
 app.get("/logout", function(req, res) {
@@ -144,12 +168,14 @@ app.post("/delete", function(req, res) {
 });
 
 app.get("/:neptiId", (req, res) => {
-
+console.log("neptiID");
   if (req.isAuthenticated()) {
     const requestedId = req.params.neptiId;
     Nepti.findById((requestedId), function(err, nepti) {
       if (err) {
-        console.log(err);
+        console.log("error");
+        //console.log(err);
+        res.redirect("/404-user");
       } else {
         res.render("edit-one", {
           nepti: nepti
@@ -157,22 +183,29 @@ app.get("/:neptiId", (req, res) => {
       }
     });
   } else {
-    res.redirect("/login");
+    res.redirect("/404");
   }
 });
 
+
 //---------Log In-------
 app.post("/login", (req, res) => {
+
   const user = new User({
     username: req.body.username,
     password: req.body.password
   });
-  // to log in and authenticate it. Method comes from passport
+
+  // to log in and authenticate it. login Method comes from passport
   req.login(user, function(err) {
+    //console.log(user);
     if (err) {
       console.log(err);
     } else {
+      //console.log("else viduje");
+      //toliau nepraeina, jei nera anksciau DB sukurtas
       passport.authenticate("local")(req, res, function() {
+      //console.log("authenticate viduje");
         res.redirect("/database");
       });
     }
@@ -242,8 +275,15 @@ app.post("/update", (req, res) => {
 });
 
 app.use('*', (req, res) => {
+  console.log("paciam gale isoka");
   res.render("404");
 });
+
+// app.use(function(req,res){
+// console.log("paciam gale isoka");
+//     res.status(404).render('404');
+// });
+
 
 app.listen(3000, function() {
   console.log("Diagnostics App has started successfully");

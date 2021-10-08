@@ -1,5 +1,5 @@
-<%- include("partials/header2"); -%>
-<%- include("partials/admin-header"); -%>
+<%- include("partials/header2"); %>
+<%- include("partials/admin-header"); %>
 
 <div class="container">
   <div class="jumbotron text-center">
@@ -12,7 +12,7 @@
         <p class="records-text"><%=nepti.species%></p>
 
         <p class="database-result"><span class="bold">Id:</span>
-          <input type="text" class="form-control  database-result" name="id"  value="<%=nepti._id%>">
+          <input type="text" class="form-control  database-result" name="id"  value="<%=nepti._id%>" readonly="readonly">
         </p>
         <p class="database-result"><span class="bold">Region:</span>
           <input type="text" class="form-control  database-result" name="region" value="<%=nepti.region%>">

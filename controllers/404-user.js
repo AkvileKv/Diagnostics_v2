@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router() //router function
 
 router.get("/", (req, res) => {
-  res.render("home");
+  res.render("404-user");
 });
 
 module.exports = router;
