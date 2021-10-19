@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-//const _ = require("lodash");
+const _ = require("lodash");
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
 
@@ -17,6 +17,11 @@ const loginRouter = require('./controllers/login');
 const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
+// const searchCentraAmericaRouter = require('./controllers/search-central-america');
+// const searchContinentalEAsiaRouter = require('./controllers/search-continental-east-asia');
+// const searchSouthAmericaRouter = require('./controllers/search-south-america');
+// const searchTheHimalayaRouter = require('./controllers/search-the-himalaya');
+
 // const databaseRouter = require('./controllers/database');
 
 const app = express();
@@ -35,6 +40,10 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
 app.use("/404-user", notFund404_userRouter);
+ app.use("/search-central-america", searchRouter);
+// app.use("/search-continental-east-asia", searchContinentalEAsiaRouter);
+// app.use("/search-south-america", searchSouthAmericaRouter);
+// app.use("/search-the-himalaya", searchTheHimalayaRouter);
 // app.use("/database", databaseRouter);
 
 app.use(bodyParser.urlencoded({
@@ -106,6 +115,18 @@ app.get("/logout", function(req, res) {
 app.get("/search-page", (req, res) => {
   res.render("search");
 });
+app.get("/search-central-america-p", (req, res) => {
+  res.render("search-central-america");
+});
+// app.get("/search-continental-east-asia", (req, res) => {
+//   res.render("search");
+// });
+// app.get("/search-south-america", (req, res) => {
+//   res.render("search");
+// });
+// app.get("/search-the-himalaya", (req, res) => {
+//   res.render("search");
+// });
 
 //------------Randu ir isvedu visus irasus esancius DB--------
 app.get("/database", (req, res) => {
@@ -168,13 +189,13 @@ app.post("/delete", function(req, res) {
 });
 
 app.get("/:neptiId", (req, res) => {
-console.log("neptiID");
+//console.log("neptiID");
   if (req.isAuthenticated()) {
     const requestedId = req.params.neptiId;
     Nepti.findById((requestedId), function(err, nepti) {
       if (err) {
         console.log("error");
-        //console.log(err);
+        console.log(err);
         res.redirect("/404-user");
       } else {
         res.render("edit-one", {
@@ -186,7 +207,6 @@ console.log("neptiID");
     res.redirect("/404");
   }
 });
-
 
 //---------Log In-------
 app.post("/login", (req, res) => {
@@ -278,11 +298,6 @@ app.use('*', (req, res) => {
   console.log("paciam gale isoka");
   res.render("404");
 });
-
-// app.use(function(req,res){
-// console.log("paciam gale isoka");
-//     res.status(404).render('404');
-// });
 
 
 app.listen(3000, function() {

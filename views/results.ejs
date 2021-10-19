@@ -35,17 +35,32 @@
     <%  neptis.forEach(function(nepti){ %>
     <img class="results-img" src="<%=nepti.filepath%>" alt="<%=nepti.species%>">
     <p></p>
+
+    <div class="circle-button">
+        <%if (nepti.region === "Central America") { %>
+
+      <a class="btn circle-big" href="/search-central-america-p" role="button">BACK TO SEARCH</a>
+
+    <% } else if (nepti.region === "Central Asia") { %>
+
+    <a class="btn circle-big" href="/search-page" role="button">BACK TO SEARCH</a>
+
+    <% }  %>
+
+    </div>
     <% }) %>
     <% } else { %>
-    <div class="circle-button">
-      <a class="btn circle-big" href="/search-page" role="button">BACK TO SEARCH</a>
-    </div>
+      <!-- if neptis.length < 0 -->
+      <div class="circle-button">
+           <a class="btn circle-big" href="/search-page" role="button">BACK TO SEARCH</a>
+         </div>
+
     <% } %>
 
   </div>
 </div>
 
-<%if (neptis.length > 0) { %>
+<%if (neptis.length < 0) { %>
 <div class="circle-button">
   <a class="btn circle" href="/search-page" role="button">BACK TO SEARCH</a>
 </div>

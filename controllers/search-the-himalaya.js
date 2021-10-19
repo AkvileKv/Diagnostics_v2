@@ -8,7 +8,7 @@ router.get("/", function(req, res) {
 
   let typedSpecies = _.toLower(req.query.dspecies);
 
-  let defaultRegion = req.query.dregion;
+  let searchRegion = "The Himalaya";
   let selectedHostPlantFamily = req.query.dhostplantfamily;
   let selectedForewing = req.query.dforewing;
   let selectedTegumen = req.query.dtegumen;
@@ -83,7 +83,7 @@ router.get("/", function(req, res) {
   }
 
   Nepti.find({
-    region: defaultRegion,
+    region: searchRegion,
     species: typedSpecies,
     hostplantfamily: selectedHostPlantFamily,
     forewing: selectedForewing,
@@ -100,14 +100,14 @@ router.get("/", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies + " defaultRegion: " + defaultRegion +
-        " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
-        selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +
-        selectedUncus + " and selectedGnathos: " + selectedGnathos + " and selectedValva: " +
-        selectedValva + " and selectedJuxta: " + selectedJuxta + " and selectedTranstilla: " +
-        selectedTranstilla + " and selectedVinculum: " + selectedVinculum +
-        " and selectedPhallusWithoutCarinae: " + selectedPhallusWithoutCarinae +
-        " and selectedPhallusWithCarinae: " + selectedPhallusWithCarinae);
+      // console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies +
+      //   " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
+      //   selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +
+      //   selectedUncus + " and selectedGnathos: " + selectedGnathos + " and selectedValva: " +
+      //   selectedValva + " and selectedJuxta: " + selectedJuxta + " and selectedTranstilla: " +
+      //   selectedTranstilla + " and selectedVinculum: " + selectedVinculum +
+      //   " and selectedPhallusWithoutCarinae: " + selectedPhallusWithoutCarinae +
+      //   " and selectedPhallusWithCarinae: " + selectedPhallusWithCarinae);
 
       res.render("results", {
         neptis: neptis
