@@ -40,7 +40,7 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
 app.use("/404-user", notFund404_userRouter);
- app.use("/search-central-america", searchRouter);
+app.use("/search-central-america", searchRouter);
 // app.use("/search-continental-east-asia", searchContinentalEAsiaRouter);
 // app.use("/search-south-america", searchSouthAmericaRouter);
 // app.use("/search-the-himalaya", searchTheHimalayaRouter);
@@ -61,7 +61,8 @@ app.use(passport.session());
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 mongoose.set("useCreateIndex", true);
 
@@ -134,7 +135,7 @@ app.get("/database", (req, res) => {
   if (req.isAuthenticated()) {
     Nepti.find({}, function(err, neptis) {
       if (err) {
-      console.log(err);
+        console.log(err);
       } else {
         console.log("Turi isvesti rezultatus");
         res.render("database", {
@@ -188,23 +189,29 @@ app.post("/delete", function(req, res) {
   );
 });
 
-app.get("/:neptiId", (req, res) => {
-//console.log("neptiID");
+app.get("/edit/:neptiId", (req, res) => {
+  //console.log("neptiID");
   if (req.isAuthenticated()) {
     const requestedId = req.params.neptiId;
-    Nepti.findById((requestedId), function(err, nepti) {
-      if (err) {
-        console.log("error");
-        console.log(err);
-        res.redirect("/404-user");
-      } else {
-        res.render("edit-one", {
-          nepti: nepti
-        });
-      }
-    });
+    if (requestedId.match(/^[0-9a-fA-F]{24}$/)) {
+      // Yes, it's a valid ObjectId, proceed with `findById` call.
+
+      Nepti.findById((requestedId), function(err, nepti) {
+        if (err) {
+          console.log("error");
+          console.log(err);
+          res.redirect("/404-user");
+        } else {
+          res.render("edit-one", {
+            nepti: nepti
+          });
+        }
+      });
+    } else {
+      res.redirect("/404");
+    }
   } else {
-    res.redirect("/404");
+    res.redirect("/login");
   }
 });
 
@@ -225,7 +232,7 @@ app.post("/login", (req, res) => {
       //console.log("else viduje");
       //toliau nepraeina, jei nera anksciau DB sukurtas
       passport.authenticate("local")(req, res, function() {
-      //console.log("authenticate viduje");
+        //console.log("authenticate viduje");
         res.redirect("/database");
       });
     }
@@ -294,9 +301,22 @@ app.post("/update", (req, res) => {
   );
 });
 
+app.use('/*/*', (req, res) => {
+  if (req.isAuthenticated()) {
+    //console.log("paciam gale isoka i **");
+    res.render("404-user");
+  } else {
+    res.render("404");
+  }
+});
+
 app.use('*', (req, res) => {
-  console.log("paciam gale isoka");
-  res.render("404");
+  if (req.isAuthenticated()) {
+    //console.log("paciam gale isoka i *");
+    res.render("404-user");
+  } else {
+    res.render("404");
+  }
 });
 
 

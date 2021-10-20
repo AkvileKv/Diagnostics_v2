@@ -17,7 +17,7 @@
 
 <div class="">
   <div class="btn-group" role="group" aria-label="Basic example" id="group">
-    <a type="button" class="btn btn-secondary" href="/<%= nepti._id %>"> Edit</a>
+    <a type="button" class="btn btn-secondary" href="/edit/<%= nepti._id %>"> Edit</a>
     <form action="/delete" method="post">
       <button class="btn btn-danger" type="submit" name="deleteById" onclick="return confirm('Are you sure you want to delete this record?');" value="<%=nepti._id%>">Delete</button>
     </form>
