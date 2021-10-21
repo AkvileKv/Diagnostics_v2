@@ -6,8 +6,8 @@ const Nepti = require('../models/nepti');
 //-----------PAIESKA---------
 router.get("/", function(req, res) {
 
+  let linkRegion;
   let typedSpecies = _.toLower(req.query.dspecies);
-
   let defaultRegion = req.query.dregion;
   let selectedHostPlantFamily = req.query.dhostplantfamily;
   let selectedForewing = req.query.dforewing;
@@ -20,6 +20,20 @@ router.get("/", function(req, res) {
   let selectedVinculum = req.query.dvinculum;
   let selectedPhallusWithoutCarinae = req.query.dphalluswithoutcarinae;
   let selectedPhallusWithCarinae = req.query.dphalluswithcarinae;
+
+  if (defaultRegion === "Central America") {
+    linkRegion = "central-america"
+  } else if (defaultRegion === "Central Asia") {
+    linkRegion = "central-asia"
+  } else if (defaultRegion === "South America") {
+    linkRegion = "south-america"
+  } else if (defaultRegion === "Continental East Asia") {
+    linkRegion = "continental-east-asia"
+  } else if (defaultRegion === "The Himalaya") {
+    linkRegion = "the-himalaya"
+  } else {
+    console.log("nerasta");
+  }
 
   if (req.query.dspecies == "") {
     typedSpecies = {
@@ -100,17 +114,18 @@ router.get("/", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies + " defaultRegion: " + defaultRegion +
-        " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
-        selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +
-        selectedUncus + " and selectedGnathos: " + selectedGnathos + " and selectedValva: " +
-        selectedValva + " and selectedJuxta: " + selectedJuxta + " and selectedTranstilla: " +
-        selectedTranstilla + " and selectedVinculum: " + selectedVinculum +
-        " and selectedPhallusWithoutCarinae: " + selectedPhallusWithoutCarinae +
-        " and selectedPhallusWithCarinae: " + selectedPhallusWithCarinae);
-
+      // console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies + " defaultRegion: " + defaultRegion +
+      //   " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
+      //   selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +
+      //   selectedUncus + " and selectedGnathos: " + selectedGnathos + " and selectedValva: " +
+      //   selectedValva + " and selectedJuxta: " + selectedJuxta + " and selectedTranstilla: " +
+      //   selectedTranstilla + " and selectedVinculum: " + selectedVinculum +
+      //   " and selectedPhallusWithoutCarinae: " + selectedPhallusWithoutCarinae +
+      //   " and selectedPhallusWithCarinae: " + selectedPhallusWithCarinae);
       res.render("results", {
-        neptis: neptis
+        neptis: neptis,
+        region: _.toUpper(defaultRegion),
+        regionLink: linkRegion
       });
     }
   });

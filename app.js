@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-const _ = require("lodash");
+//onst _ = require("lodash");
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
 
@@ -17,11 +17,6 @@ const loginRouter = require('./controllers/login');
 const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
-// const searchCentraAmericaRouter = require('./controllers/search-central-america');
-// const searchContinentalEAsiaRouter = require('./controllers/search-continental-east-asia');
-// const searchSouthAmericaRouter = require('./controllers/search-south-america');
-// const searchTheHimalayaRouter = require('./controllers/search-the-himalaya');
-
 // const databaseRouter = require('./controllers/database');
 
 const app = express();
@@ -35,15 +30,15 @@ app.use(express.static("assets"));
 
 app.use("/", homeRouter);
 app.use("/cite-us", citeRouter);
-app.use("/search", searchRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
 app.use("/404-user", notFund404_userRouter);
-app.use("/search-central-america", searchRouter);
-// app.use("/search-continental-east-asia", searchContinentalEAsiaRouter);
-// app.use("/search-south-america", searchSouthAmericaRouter);
-// app.use("/search-the-himalaya", searchTheHimalayaRouter);
+app.use("/s-central-asia", searchRouter);
+app.use("/s-central-america", searchRouter);
+app.use("/s-continental-east-asia", searchRouter);
+app.use("/s-south-america", searchRouter);
+app.use("/s-the-himalaya", searchRouter);
 // app.use("/database", databaseRouter);
 
 app.use(bodyParser.urlencoded({
@@ -113,21 +108,21 @@ app.get("/logout", function(req, res) {
 });
 
 //-----------pagal URL / atvaizduoja search.ejs --------
-app.get("/search-page", (req, res) => {
-  res.render("search");
+app.get("/search-central-asia", (req, res) => {
+  res.render("s-central-asia");
 });
-app.get("/search-central-america-p", (req, res) => {
-  res.render("search-central-america");
+app.get("/search-central-america", (req, res) => {
+  res.render("s-central-america");
 });
-// app.get("/search-continental-east-asia", (req, res) => {
-//   res.render("search");
-// });
-// app.get("/search-south-america", (req, res) => {
-//   res.render("search");
-// });
-// app.get("/search-the-himalaya", (req, res) => {
-//   res.render("search");
-// });
+app.get("/search-continental-east-asia", (req, res) => {
+  res.render("s-continental-east-asia");
+});
+app.get("/search-south-america", (req, res) => {
+  res.render("s-south-america");
+});
+app.get("/search-the-himalaya", (req, res) => {
+  res.render("s-the-himalaya");
+});
 
 //------------Randu ir isvedu visus irasus esancius DB--------
 app.get("/database", (req, res) => {
@@ -149,7 +144,6 @@ app.get("/database", (req, res) => {
 });
 
 app.get("/create", (req, res) => {
-
   if (req.isAuthenticated()) {
     res.render("create");
   } else {
