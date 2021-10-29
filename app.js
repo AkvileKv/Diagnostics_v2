@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session');
+const { v4: uuidv4 } = require('uuid'); // uuid, To call: uuidv4();
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 //onst _ = require("lodash");
@@ -46,9 +47,13 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
+  genid: function (req) {
+    return uuidv4();
+  },
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 60 * 60 * 1000, secure: false } // 1 hour
 }));
 
 app.use(passport.initialize());
@@ -76,7 +81,7 @@ app.post("/register", (req, res) => {
     }
     var message;
     if (user) {
-      console.log(user);
+      //console.log(user);
       message = "User exists";
       console.log(message);
       res.redirect("/register");
@@ -225,7 +230,7 @@ app.post("/login", (req, res) => {
     } else {
       //console.log("else viduje");
       //toliau nepraeina, jei nera anksciau DB sukurtas
-      passport.authenticate("local")(req, res, function() {
+      passport.authenticate("local", { failureRedirect: '/login' })(req, res, function() {
         //console.log("authenticate viduje");
         res.redirect("/database");
       });
@@ -288,7 +293,7 @@ app.post("/update", (req, res) => {
         console.log(err);
       } else {
         console.log("Succesfully updated item");
-        console.log(req.body.region);
+        //console.log(req.body.region);
         res.redirect("/database");
       }
     }
