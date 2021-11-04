@@ -8,6 +8,21 @@
     <h1 class="display-3">All records</h1>
     <p class="records-text">NeptiDB</p>
 
+    <!-- empty space-->
+    <section id="results-found" class="clear-section">
+      <div class="container-fluid">
+        <div class="empty-space3">
+          <%if (neptis.length === 1) { %>
+          <p class="found"><%=neptis.length%> record found</p>
+          <% } else if (neptis.length > 1) { %>
+          <p class="found"><%=neptis.length%> records found</p>
+          <% } else { %>
+          <p class="found">Sorry - no records found. Please try again.</p>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
     <%  neptis.forEach(function(nepti){ %>
 
       <p class="database-result"><span class="bold">Region:</span> <%=nepti.region%> </p>
