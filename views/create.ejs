@@ -10,27 +10,58 @@
 
     <form action="/create" method="post">
 
-  <div class="form-group">
-    <input type="text" class="form-control text-center" name="region" placeholder="region" required>
-    <input type="text" class="form-control text-center" name="species" placeholder="species" required>
-    <input type="text" class="form-control text-center" name="hostplantfamily" placeholder="hostplant family" required>
-    <input type="text" class="form-control text-center" name="forewing" placeholder="forewing" required>
-    <input type="text" class="form-control text-center" name="tegumen" placeholder="tegumen" required>
-    <input type="text" class="form-control text-center" name="uncus" placeholder="uncus" required>
-    <input type="text" class="form-control text-center" name="gnathos" placeholder="gnathos" required>
-    <input type="text" class="form-control text-center" name="valva" placeholder="valva" required>
-    <input type="text" class="form-control text-center" name="juxta" placeholder="juxta" required>
-    <input type="text" class="form-control text-center" name="transtilla" placeholder="transtilla" required>
-    <input type="text" class="form-control text-center" name="vinculum" placeholder="vinculum" required>
-    <input type="text" class="form-control text-center" name="phalluswithoutcarinae" placeholder="phallus without carinae" required>
-    <input type="text" class="form-control text-center" name="phalluswithcarinae" placeholder="phallus with carinae" required>
-    <input type="text" class="form-control text-center" name="filepath" placeholder="file path" required>
-  </div>
-  <button type="submit" class="btn yellow-button w-100" onclick="return confirm('Are you sure you want to create a new record?');">CREATE</button>
-</form>
+      <div class="form-group">
+        <input type="text" class="form-control text-center" name="region" placeholder="region">
+        <input type="text" class="form-control text-center" name="species" placeholder="species">
+
+        <div class="form-row">
+          <input type="text" class="form-control text-center" name="hostplantfamily1" placeholder="hostplant family">
+        </div>
+        <div id="add_hostplant11">
+
+        </div>
+        <button class="plus-button" type="button" onclick="hpF()">+</button><br><br>
+
+
+        <input type="text" class="form-control text-center" name="forewing" placeholder="forewing">
+        <input type="text" class="form-control text-center" name="tegumen" placeholder="tegumen">
+        <input type="text" class="form-control text-center" name="uncus" placeholder="uncus">
+        <input type="text" class="form-control text-center" name="gnathos" placeholder="gnathos">
+        <input type="text" class="form-control text-center" name="valva" placeholder="valva">
+        <input type="text" class="form-control text-center" name="juxta" placeholder="juxta">
+        <input type="text" class="form-control text-center" name="transtilla" placeholder="transtilla">
+        <input type="text" class="form-control text-center" name="vinculum" placeholder="vinculum">
+        <input type="text" class="form-control text-center" name="phalluswithoutcarinae" placeholder="phallus without carinae">
+        <input type="text" class="form-control text-center" name="phalluswithcarinae" placeholder="phallus with carinae">
+        <input type="text" class="form-control text-center" name="filepath" placeholder="file path">
+
+        <input type="hidden" id="hostplant21" name="hostplant22" value="1">
+      </div>
+      <button type="submit" class="btn yellow-button w-100" onclick="return confirm('Are you sure you want to create a new record?');">CREATE</button>
+    </form>
 
   </div>
 </div>
+
+<script>
+  var value11 = 2;
+  var div11 = 1;
+  var addHostplant1 = "add_hostplant1";
+
+  function hpF() {
+    var join11 = addHostplant1 + div11;
+    div11++;
+    document.getElementById(join11).innerHTML +=
+      `
+        <div class="form-row">
+            <input type="text" class="form-control text-center" name="hostplantfamily` + value11 + `" placeholder="hostplant family">
+        </div>
+        <div id="add_hostplant1` + div11 + `">
+      `;
+    document.getElementById("hostplant21").value = value11;
+    value11++;
+  }
+</script>
 
 
 <%- include('partials/footer') %>

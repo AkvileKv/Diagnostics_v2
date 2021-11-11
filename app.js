@@ -79,7 +79,7 @@ app.post("/register", (req, res) => {
     if (err) {
       console.log(err);
     }
-    var message;
+    let message;
     if (user) {
       //console.log(user);
       message = "User exists";
@@ -241,22 +241,33 @@ app.post("/login", (req, res) => {
 //------------create.ejs formoj ivedu nauja irasa ir nukreipiu i /database--------
 app.post("/create", (req, res) => {
 
-  const nepti = new Nepti({
-    region: req.body.region,
-    species: req.body.species,
-    hostplantfamily: req.body.hostplantfamily,
-    forewing: req.body.forewing,
-    tegumen: req.body.tegumen,
-    uncus: req.body.uncus,
-    gnathos: req.body.gnathos,
-    valva: req.body.valva,
-    juxta: req.body.juxta,
-    transtilla: req.body.transtilla,
-    vinculum: req.body.vinculum,
-    phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-    phalluswithcarinae: req.body.phalluswithcarinae,
-    filepath: req.body.filepath
-  });
+      const nepti = new Nepti({
+        region: req.body.region,
+        species: req.body.species,
+
+        // forewing: req.body.forewing,
+        // tegumen: req.body.tegumen,
+        // uncus: req.body.uncus,
+        // gnathos: req.body.gnathos,
+        // valva: req.body.valva,
+        // juxta: req.body.juxta,
+        // transtilla: req.body.transtilla,
+        // vinculum: req.body.vinculum,
+        // phalluswithoutcarinae: req.body.phalluswithoutcarinae,
+        // phalluswithcarinae: req.body.phalluswithcarinae,
+        filepath: req.body.filepath
+      });
+      let hostplantfamily = "req.body.hostplantfamily";
+
+      for (let c = 1; c <= parseInt(req.body.hostplant22); c++) {
+        let iteration11 = c;
+        let hostplantiteration = hostplantfamily + iteration11;
+        let joinedhostplantiteration = eval(hostplantiteration);
+
+        nepti.hostplantfamily.push(joinedhostplantiteration)
+      }
+
+
   // issaugau nauja irasa kolekcijoje
   nepti.save(function(err) {
     if (!err) {
