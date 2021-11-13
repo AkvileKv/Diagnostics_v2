@@ -244,51 +244,19 @@ app.post("/create", (req, res) => {
       const nepti = new Nepti({
         region: req.body.region,
         species: req.body.species,
-
-        // gnathos: req.body.gnathos,
-        // valva: req.body.valva,
-        // juxta: req.body.juxta,
-        // transtilla: req.body.transtilla,
-        // vinculum: req.body.vinculum,
-        // phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-        // phalluswithcarinae: req.body.phalluswithcarinae,
+        hostplantfamily: req.body.hostplantfamily,
+        forewing : req.body.forewing,
+        tegumen : req.body.tegumen,
+        uncus : req.body.uncus,
+        gnathos: req.body.gnathos,
+        valva: req.body.valva,
+        juxta: req.body.juxta,
+        transtilla: req.body.transtilla,
+        vinculum: req.body.vinculum,
+        phalluswithoutcarinae: req.body.phalluswithoutcarinae,
+        phalluswithcarinae: req.body.phalluswithcarinae,
         filepath: req.body.filepath
       });
-      let hostplantfamily = "req.body.hostplantfamily";
-      let forewing = "req.body.forewing";
-      let tegumen = "req.body.tegumen";
-      let uncus = "req.body.uncus";
-
-      for (let i = 1; i <= parseInt(req.body.hostplant22); i++) {
-        let iteration = i;
-        let hostplantIter = hostplantfamily + iteration;
-        let jHostplantIteration = eval(hostplantIter);
-
-        nepti.hostplantfamily.push(jHostplantIteration)
-      }
-      for (let i = 1; i <= parseInt(req.body.forewing22); i++) {
-        let iteration = i;
-        let forewingIter = forewing + iteration;
-        let jForewingIteration = eval(forewingIter);
-
-        nepti.forewing.push(jForewingIteration)
-      }
-      for (let i = 1; i <= parseInt(req.body.tegumen22); i++) {
-        let iteration = i;
-        let tegumenIter = tegumen + iteration;
-        let jTegumenIteration = eval(tegumenIter);
-
-        nepti.tegumen.push(jTegumenIteration)
-      }
-      for (let i = 1; i <= parseInt(req.body.uncus22); i++) {
-        let iteration = i;
-        let uncusIter = uncus + iteration;
-        let jUncusIteration = eval(uncusIter);
-
-        nepti.uncus.push(jUncusIteration)
-      }
-
-
   // issaugau nauja irasa kolekcijoje
   nepti.save(function(err) {
     if (!err) {

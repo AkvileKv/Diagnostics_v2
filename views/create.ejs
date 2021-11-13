@@ -11,36 +11,100 @@
     <form action="/create" method="post">
 
       <div class="form-group">
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="region" placeholder="region">
-        </div>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="species" placeholder="species">
-        </div>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="hostplantfamily1" placeholder="hostplant family">
-        </div>
-        <div id="add_hostplant11"></div>
-        <button class="plus-button" type="button" onclick="hostplantAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="forewing1" placeholder="forewing">
-        </div>
-        <div id="add_forewing11"></div>
-        <button class="plus-button" type="button" onclick="forewingAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="tegumen1" placeholder="tegumen">
-        </div>
-        <div id="add_tegumen11"></div>
-        <button class="plus-button" type="button" onclick="tegumenAdd()">+</button><br><br>
 
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">REGION</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="region" class="select-gray3 form-select form-control-lg">
+            <option style="color:gray" value="null">select a region</option>
+              <option class="others" value="Central America">Central America</option>
+              <option class="others" value="South America">South America</option>
+              <option class="others" value="Continental East Asia">Continental East Asia</option>
+              <option class="others" value="The Himalaya">The Himalaya</option>
+              <option class="others" value="Central Asia">Central Asia</option>
+            </select>
+          </div>
+        </div>
 
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">SPECIES</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <input type="text" class="form-control form-control-lg" name="species" placeholder="">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">FILE PATH</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <input type="text" class="form-control form-control-lg" name="filepath" placeholder="">
+          </div>
+        </div>
+<p class="red-color">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options below</p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">HOST-PLANT FAMILY</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12 character-select">
+            <select name="hostplantfamily" class="select-gray form-select form-control" multiple>
+              <option class="others" value="Not selected or unknown">Not selected or unknown</option>
+              <option class="others" value="Anacardiaceae">Anacardiaceae</option>
+              <option class="others" value="Asteraceae">Asteraceae</option>
+              <option class="others" value="Betulaceae">Betulaceae</option>
+              <option class="others" value="Ericaceae">Ericaceae</option>
+              <option class="others" value="Fabaceae">Fabaceae</option>
+              <option class="others" value="Fagaceae">Fagaceae</option>
+              <option class="others" value="Lamiaceae">Lamiaceae</option>
+              <option class="others" value="Malvaceae">Malvaceae</option>
+              <option class="others" value="Myrtaceae">Myrtaceae</option>
+              <option class="others" value="Rhamnaceae">Rhamnaceae</option>
+              <option class="others" value="Rosaceae">Rosaceae</option>
+              <option class="others" value="Salicaceae">Salicaceae</option>
+              <option class="others" value="Sapindaceae (=Aceraceae)">Sapindaceae (=Aceraceae)</option>
+              <option class="others" value="Ulmaceae (=Cannabaceae)">Ulmaceae (=Cannabaceae)</option>
+              <option class="others" value="Urticaceae">Urticaceae</option>
+              <option class="others" value="Another family, not included in this list">Another family, not included in this list</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">FOREWING</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="forewing" class="select-gray2 form-select form-control" multiple>
+              <option class="others" value="Without a pattern, almost uniform">Without a pattern, almost uniform</option>
+              <option class="others" value="With a conspicuous fascia(e) but no spots">With a conspicuous fascia(e) but no spots</option>
+              <option class="others" value="With a dark, false fascia(e)">With a dark, false fascia(e)</option>
+              <option class="others" value="With a spot(s) but no fascia">With a spot(s) but no fascia</option>
+              <option class="others" value="With a fascia and spot(s)">With a fascia and spot(s)</option>
+              <option class="others" value="Irrorated or sparsely speckled">Irrorated or sparsely speckled</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">TEGUMEN</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="tegumen" class="select-gray3 form-select form-control" multiple>
+              <option class="others" value="Band-shaped, pseuduncus absent">Band-shaped, pseuduncus absent</option>
+              <option class="others" value="Extended into a one-lobed pseuduncus">Extended into a one-lobed pseuduncus</option>
+              <option class="others" value="Extended into a bifid or trifid pseuduncus">Extended into a bifid or trifid pseuduncus</option>
+            </select>
+          </div>
+        </div>
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">UNCUS</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <select name="uncus1" class="select-gray4 form-select form-control-lg">
-              <option style="color:gray;" value="null">select a character</option>
+            <select name="uncus" class="select-gray4 form-select form-control" multiple>
               <option class="others" value="One-lobed">One-lobed</option>
               <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
               <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
@@ -50,61 +114,113 @@
             </select>
           </div>
         </div>
-        <!-- <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="uncus1" placeholder="uncus">
-        </div> -->
-        <div id="add_uncus11"></div>
-        <button class="plus-button" type="button" onclick="uncusAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="gnathos1" placeholder="gnathos">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">GNATHOS</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="gnathos" class="select-gray5 form-select form-control" multiple>
+              <option class="others" value="Widely U-shaped">Widely U-shaped</option>
+              <option class="others" value="Inverted V- or Y-shaped">Inverted V- or Y-shaped</option>
+              <option class="others" value="With one short caudal process or lobe">With one short caudal process or lobe</option>
+              <option class="others" value="With one long caudal process">With one long caudal process</option>
+              <option class="others" value="With two long caudal processes">With two long caudal processes</option>
+              <option class="others" value="H-shaped, with conspicuous anterior processes">H-shaped, with conspicuous anterior processes</option>
+              <option class="others" value="With a large caudal lobe">With a large caudal lobe</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <div id="add_gnathos11"></div>
-        <button class="plus-button" type="button" onclick="gnathosAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="valva1" placeholder="valva">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">VALVA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="valva" class="select-gray6 form-select form-control" multiple>
+              <option class="others" value="Without an apical process">Without an apical process</option>
+              <option class="others" value="With one short or medium short apical process">With one short or medium short apical process</option>
+              <option class="others" value="With one long or very long apical process">With one long or very long apical process</option>
+              <option class="others" value="With two apical processes">With two apical processes</option>
+              <option class="others" value="With a median or basal, slender or lobe-like process(es)">With a median or basal, slender or lobe-like process(es)</option>
+              <option class="others" value="Valva deeply divided, two-folded">Valva deeply divided, two-folded</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <div id="add_valva11"></div>
-        <button class="plus-button" type="button" onclick="valvaAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="juxta1" placeholder="juxta">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">JUXTA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="juxta" class="select-gray7 form-select form-control" multiple>
+              <option class="others" value="Absent or mostly membranous, inconspicuous">Absent or mostly membranous, inconspicuous</option>
+              <option class="others" value="Distinctly thickened, at least partially">Distinctly thickened, at least partially</option>
+            </select>
+          </div>
         </div>
-        <div id="add_juxta11"></div>
-        <button class="plus-button" type="button" onclick="juxtaAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="transtilla1" placeholder="transtilla">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">TRANSTILLA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="transtilla" class="select-gray8 form-select form-control" multiple>
+              <option class="others" value="Without sublateral processes">Without sublateral processes</option>
+              <option class="others" value="With short or weakly differentiated processes">With short or weakly differentiated processes</option>
+              <option class="others" value="With long but slender sublateral processes">With long but slender sublateral processes</option>
+              <option class="others" value="With long but wide sublateral processes">With long but wide sublateral processes</option>
+              <option class="others" value="Absent">Absent</option>
+            </select>
+          </div>
         </div>
-        <div id="add_transtilla11"></div>
-        <button class="plus-button" type="button" onclick="transtillaAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="vinculum1" placeholder="vinculum">
-        </div>
-        <div id="add_vinculum11"></div>
-        <button class="plus-button" type="button" onclick="vinculumAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="phalluswithoutcarinae1" placeholder="phallus without carinae">
-        </div>
-        <div id="add_phalluswithoutcarinae11"></div>
-        <button class="plus-button" type="button" onclick="phalluswithoutcarinaeAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="phalluswithcarinae1" placeholder="phallus with carinae">
-        </div>
-        <div id="add_phalluswithcarinae11"></div>
-        <button class="plus-button" type="button" onclick="phalluswithcarinaeAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="filepath" placeholder="file path">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">VINCULUM</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="vinculum" class="select-gray9 form-select form-control" multiple>
+              <option class="others" value="Short or medium short; lateral lobes short or absent">Short or medium short; lateral lobes short or absent</option>
+              <option class="others" value="Short or medium short; lateral lobes long">Short or medium short; lateral lobes long</option>
+              <option class="others" value="Long or very long, with lateral lobes">Long or very long, with lateral lobes</option>
+              <option class="others" value="Long or very long, without lateral lobes">Long or very long, without lateral lobes</option>
+            </select>
+          </div>
         </div>
 
-        <input type="hidden" id="hostplant21" name="hostplant22" value="1">
-        <input type="hidden" id="forewing21" name="forewing22" value="1">
-        <input type="hidden" id="tegumen21" name="tegumen22" value="1">
-        <input type="hidden" id="uncus21" name="uncus22" value="1">
-        <input type="hidden" id="gnathos21" name="gnathos22" value="1">
-        <input type="hidden" id="valva21" name="valva22" value="1">
-        <input type="hidden" id="juxta21" name="juxta22" value="1">
-        <input type="hidden" id="transtilla21" name="transtilla22" value="1">
-        <input type="hidden" id="vinculum21" name="vinculum22" value="1">
-        <input type="hidden" id="phalluswithoutcarinae21" name="phalluswithoutcarinae22" value="1">
-        <input type="hidden" id="phalluswithcarinae21" name="phalluswithcarinae22" value="1">
+        <div class="form-row">
+          <div class="col-md-4 col-sm-12 character-name">
+            <label for="inputState">PHALLUS WITHOUT DISTINCTIVE CARINAE</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="phalluswithoutcarinae" class="select-gray10 form-select form-control" multiple>
+              <!-- <option style="color:gray" value="null">without distinctive carinae</option> -->
+              <option class="others" value="Without cornuti or only a few small cornuti">Without cornuti or only a few small cornuti</option>
+              <option class="others" value="With numerous small but loose cornuti">With numerous small but loose cornuti</option>
+              <option class="others" value="With numerous small cornuti in a compact band(s)">With numerous small cornuti in a compact band(s)</option>
+              <option class="others" value="With several spine-like but loose cornuti">With several spine-like but loose cornuti</option>
+              <option class="others" value="With many large but loose cornuti">With many large but loose cornuti</option>
+              <option class="others" value="With many large + small but loose cornuti">With many large + small but loose cornuti</option>
+              <option class="others" value="With large or large + small cornuti in a compact band">With large or large + small cornuti in a compact band</option>
+              <option class="others" value="With differentiated cornuti in separate clusters">With differentiated cornuti in separate clusters</option>
+              <option class="others" value="With 1–3 loose horn-like cornuti">With 1–3 loose horn-like cornuti</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 col-sm-12 character-name">
+              <label for="inputState">PHALLUS WITH DISTINCTIVE CARINAE</label>
+            </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="phalluswithcarinae" class="select-gray11 form-select form-control" multiple>
+              <!-- <option style="color:gray" value="null">with distinctive carinae</option> -->
+              <option class="others" value="With only ventral carinae and without or a very few cornuti">With only ventral carinae and without or a very few cornuti</option>
+              <option class="others" value="With only two dentate plates and without or very few cornuti">With only two dentate plates and without or very few cornuti</option>
+              <option class="others" value="With ventral + lateral carinae and without or some very small cornuti">With ventral + lateral carinae and without or some very small cornuti</option>
+              <option class="others" value="With ventral and/or lateral carinae and horn-like + small cornuti">With ventral and/or lateral carinae and horn-like + small cornuti</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
 
       </div>
       <button type="submit" class="btn yellow-button w-100" onclick="return confirm('Are you sure you want to create a new record?');">CREATE</button>
@@ -113,97 +229,6 @@
   </div>
 </div>
 
-<script>
-  var value = 2;
-  var div = 1;
-  var addHostplant = "add_hostplant1";
-
-  function hostplantAdd() {
-    var join = addHostplant + div;
-    div++;
-    document.getElementById(join).innerHTML +=
-      `
-        <div class="form-row form-row-add">
-            <input type="text" class="form-control text-center" name="hostplantfamily` + value + `" placeholder="hostplant family">
-        </div>
-        <div id="add_hostplant1` + div + `">
-      `;
-    document.getElementById("hostplant21").value = value;
-    value++;
-  }
-</script>
-<script>
-  var value1 = 2;
-  var div1 = 1;
-  var addForewing = "add_forewing1";
-
-  function forewingAdd() {
-    var join1 = addForewing + div1;
-    div1++;
-    document.getElementById(join1).innerHTML +=
-      `
-        <div class="form-row form-row-add">
-            <input type="text" class="form-control text-center" name="forewing` + value1 + `" placeholder="forewing">
-        </div>
-        <div id="add_forewing1` + div1 + `">
-      `;
-    document.getElementById("forewing21").value = value1;
-    value1++;
-  }
-</script>
-<script>
-  var value2 = 2;
-  var div2 = 1;
-  var addTegumen = "add_tegumen1";
-
-  function tegumenAdd() {
-    var join2 = addTegumen + div2;
-    div2++;
-    document.getElementById(join2).innerHTML +=
-      `
-        <div class="form-row form-row-add">
-            <input type="text" class="form-control text-center" name="tegumen` + value2 + `" placeholder="tegumen">
-        </div>
-        <div id="add_tegumen1` + div2 + `">
-      `;
-    document.getElementById("tegumen21").value = value2;
-    value2++;
-  }
-</script>
-
-<script>
-  var value3 = 2;
-  var div3 = 1;
-  var addUncus = "add_uncus1";
-
-  function uncusAdd() {
-    var join3 = addUncus + div3;
-    div3++;
-    document.getElementById(join3).innerHTML +=
-      `
-      <div class="form-row">
-        <div class="col-lg-4 col-md-6 col-sm-12 character-name">
-          <label for="inputState">UNCUS</label>
-        </div>
-        <div class="col-lg-8 col-md-6 col-sm-12">
-          <select name="uncus` + value3 + `" class="select-gray4 form-select form-control-lg">
-            <option style="color:gray;" value="null">select a character</option>
-            <option class="others" value="One-lobed">One-lobed</option>
-            <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
-            <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
-            <option class="others" value="Inverted Y- or V-shaped<">Inverted Y- or V-shaped</option>
-            <option class="others" value="Other">Other</option>
-            <option class="others" value="Uncus absent">Uncus absent</option>
-          </select>
-        </div>
-      </div>
-      <div id="add_uncus1` + div3 + `">
-      `;
-
-    document.getElementById("uncus21").value = value3;
-    value3++;
-  }
-</script>
 
 
 <%- include('partials/footer') %>

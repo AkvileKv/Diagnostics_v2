@@ -455,11 +455,9 @@ input:focus::-webkit-input-placeholder {
   text-align: center;
   color: #7BA8AE;
 }
-
-.form-row-add {
-  margin-right: 0;
+.red-color{
+  color: red;
 }
-
 
 /*----------------------------------- OLD*/
 .records-text {
