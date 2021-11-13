@@ -245,8 +245,7 @@ app.post("/create", (req, res) => {
         region: req.body.region,
         species: req.body.species,
 
-        // forewing: req.body.forewing,
-        // tegumen: req.body.tegumen,
+
         // uncus: req.body.uncus,
         // gnathos: req.body.gnathos,
         // valva: req.body.valva,
@@ -258,13 +257,29 @@ app.post("/create", (req, res) => {
         filepath: req.body.filepath
       });
       let hostplantfamily = "req.body.hostplantfamily";
+      let forewing = "req.body.forewing";
+      let tegumen = "req.body.tegumen";
 
-      for (let c = 1; c <= parseInt(req.body.hostplant22); c++) {
-        let iteration11 = c;
-        let hostplantiteration = hostplantfamily + iteration11;
-        let joinedhostplantiteration = eval(hostplantiteration);
+      for (let i = 1; i <= parseInt(req.body.hostplant22); i++) {
+        let iteration = i;
+        let hostplantIter = hostplantfamily + iteration;
+        let jHostplantIteration = eval(hostplantIter);
 
-        nepti.hostplantfamily.push(joinedhostplantiteration)
+        nepti.hostplantfamily.push(jHostplantIteration)
+      }
+      for (let i = 1; i <= parseInt(req.body.forewing22); i++) {
+        let iteration = i;
+        let forewingIter = forewing + iteration;
+        let jForewingIteration = eval(forewingIter);
+
+        nepti.forewing.push(jForewingIteration)
+      }
+      for (let i = 1; i <= parseInt(req.body.tegumen22); i++) {
+        let iteration = i;
+        let tegumenIter = tegumen + iteration;
+        let jTegumenIteration = eval(tegumenIter);
+
+        nepti.tegumen.push(jTegumenIteration)
       }
 
 
