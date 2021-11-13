@@ -245,8 +245,6 @@ app.post("/create", (req, res) => {
         region: req.body.region,
         species: req.body.species,
 
-
-        // uncus: req.body.uncus,
         // gnathos: req.body.gnathos,
         // valva: req.body.valva,
         // juxta: req.body.juxta,
@@ -259,6 +257,7 @@ app.post("/create", (req, res) => {
       let hostplantfamily = "req.body.hostplantfamily";
       let forewing = "req.body.forewing";
       let tegumen = "req.body.tegumen";
+      let uncus = "req.body.uncus";
 
       for (let i = 1; i <= parseInt(req.body.hostplant22); i++) {
         let iteration = i;
@@ -280,6 +279,13 @@ app.post("/create", (req, res) => {
         let jTegumenIteration = eval(tegumenIter);
 
         nepti.tegumen.push(jTegumenIteration)
+      }
+      for (let i = 1; i <= parseInt(req.body.uncus22); i++) {
+        let iteration = i;
+        let uncusIter = uncus + iteration;
+        let jUncusIteration = eval(uncusIter);
+
+        nepti.uncus.push(jUncusIteration)
       }
 
 

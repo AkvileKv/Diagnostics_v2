@@ -32,9 +32,27 @@
         </div>
         <div id="add_tegumen11"></div>
         <button class="plus-button" type="button" onclick="tegumenAdd()">+</button><br><br>
-        <div class="form-row form-row-add">
-          <input type="text" class="form-control text-center" name="uncus1" placeholder="uncus">
+
+
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">UNCUS</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="uncus1" class="select-gray4 form-select form-control-lg">
+              <option style="color:gray;" value="null">select a character</option>
+              <option class="others" value="One-lobed">One-lobed</option>
+              <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
+              <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
+              <option class="others" value="Inverted Y- or V-shaped<">Inverted Y- or V-shaped</option>
+              <option class="others" value="Other">Other</option>
+              <option class="others" value="Uncus absent">Uncus absent</option>
+            </select>
+          </div>
         </div>
+        <!-- <div class="form-row form-row-add">
+          <input type="text" class="form-control text-center" name="uncus1" placeholder="uncus">
+        </div> -->
         <div id="add_uncus11"></div>
         <button class="plus-button" type="button" onclick="uncusAdd()">+</button><br><br>
         <div class="form-row form-row-add">
@@ -150,6 +168,40 @@
       `;
     document.getElementById("tegumen21").value = value2;
     value2++;
+  }
+</script>
+
+<script>
+  var value3 = 2;
+  var div3 = 1;
+  var addUncus = "add_uncus1";
+
+  function uncusAdd() {
+    var join3 = addUncus + div3;
+    div3++;
+    document.getElementById(join3).innerHTML +=
+      `
+      <div class="form-row">
+        <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+          <label for="inputState">UNCUS</label>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12">
+          <select name="uncus` + value3 + `" class="select-gray4 form-select form-control-lg">
+            <option style="color:gray;" value="null">select a character</option>
+            <option class="others" value="One-lobed">One-lobed</option>
+            <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
+            <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
+            <option class="others" value="Inverted Y- or V-shaped<">Inverted Y- or V-shaped</option>
+            <option class="others" value="Other">Other</option>
+            <option class="others" value="Uncus absent">Uncus absent</option>
+          </select>
+        </div>
+      </div>
+      <div id="add_uncus1` + div3 + `">
+      `;
+
+    document.getElementById("uncus21").value = value3;
+    value3++;
   }
 </script>
 
