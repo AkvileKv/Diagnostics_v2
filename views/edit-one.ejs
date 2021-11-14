@@ -14,12 +14,37 @@
         <p class="database-result"><span class="bold">Id:</span>
           <input type="text" class="form-control  database-result" name="id"  value="<%=nepti._id%>" readonly="readonly">
         </p>
-        <p class="database-result"><span class="bold">Region:</span>
-          <input type="text" class="form-control  database-result" name="region" value="<%=nepti.region%>">
-        </p>
-        <p class="database-result"><span class="bold">Species:</span>
-          <input type="text" class="form-control database-result" name="species" value="<%=nepti.species%>">
-        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">SPECIES</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <input type="text" class="form-control form-control-lg" name="species" value="<%=nepti.species%>" readonly="readonly">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">REGION</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="region" class="select-gray3 form-select form-control-lg">
+              <option style="color:gray" value="null">select a region</option>
+              <option class="others" <%if (nepti.region === "Central America") { %> selected <% } %> value="Central America">Central America</option>
+              <option class="others" <%if (nepti.region === "South America") { %> selected <% } %> value="South America">South America</option>
+              <option class="others" <%if (nepti.region === "Continental East Asia") { %> selected <% } %> value="Continental East Asia">Continental East Asia</option>
+              <option class="others" <%if (nepti.region === "The Himalaya") { %> selected <% } %> value="The Himalaya">The Himalaya</option>
+              <option class="others" <%if (nepti.region === "Central Asia") { %> selected <% } %> value="Central Asia">Central Asia</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">SPECIES</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <input type="text" class="form-control form-control-lg" name="species" value="<%=nepti.species%>" readonly="readonly">
+          </div>
+        </div>
         <p class="database-result"><span class="bold">Hostplant family:</span>
           <input type="text" class="form-control database-result" name="hostplantfamily" value="<%=nepti.hostplantfamily%>">
         </p>
@@ -27,8 +52,20 @@
           <input type="text" class="form-control database-result" name="forewing" value="<%=nepti.forewing%>">
         </p>
         <p class="database-result"><span class="bold">Tegumen:</span>
-          <input type="text" class="form-control database-result" name="tegumen" value="<%=nepti.tegumen%>">
+          <input type="text" class="form-control database-result" name="tegumen" value="<%=nepti.tegumen%>" readonly="readonly" >
         </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">TEGUMEN</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="ntegumen" class="select-gray3 form-select form-control" multiple>
+              <option class="others" <%if (nepti.tegumen === "Band-shaped, pseuduncus absent") { %> selected <% } %> value="Band-shaped, pseuduncus absent">Band-shaped, pseuduncus absent</option>
+              <option class="others" <%if (nepti.tegumen === "Extended into a one-lobed pseuduncus") { %> selected <% } %> value="Extended into a one-lobed pseuduncus">Extended into a one-lobed pseuduncus</option>
+              <option class="others" <%if (nepti.tegumen === "Extended into a bifid or trifid pseuduncus") { %> selected <% } %> value="Extended into a bifid or trifid pseuduncus">Extended into a bifid or trifid pseuduncus</option>
+            </select>
+          </div>
+        </div>
         <p class="database-result"><span class="bold">Uncus:</span>
           <input type="text" class="form-control database-result" name="uncus" value="<%=nepti.uncus%>">
         </p>
