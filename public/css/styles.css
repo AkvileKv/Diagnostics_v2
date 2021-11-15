@@ -358,8 +358,8 @@ input:focus::-webkit-input-placeholder {
   text-decoration: none;
   font-size: 80%;
   position: fixed;
-  right: 6.8rem;
-  bottom: 9.8rem;
+  right: 1rem;
+  bottom: 5rem;
 }
 
 .circle-big {

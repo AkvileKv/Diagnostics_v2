@@ -257,7 +257,7 @@ app.post("/create", (req, res) => {
         phalluswithcarinae: req.body.phalluswithcarinae,
         filepath: req.body.filepath
       });
-  // issaugau nauja irasa kolekcijoje
+
   nepti.save(function(err) {
     if (!err) {
       console.log("Succesfully created");
@@ -268,36 +268,61 @@ app.post("/create", (req, res) => {
 
 app.post("/update", (req, res) => {
 
-  Nepti.findOneAndUpdate({
-      _id: req.body.id
-    }, {
-      $set: {
-        region: req.body.region,
-        species: req.body.species,
-        hostplantfamily: req.body.hostplantfamily,
-        forewing: req.body.forewing,
-        tegumen: req.body.tegumen,
-        uncus: req.body.uncus,
-        gnathos: req.body.gnathos,
-        valva: req.body.valva,
-        juxta: req.body.juxta,
-        transtilla: req.body.transtilla,
-        vinculum: req.body.vinculum,
-        phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-        phalluswithcarinae: req.body.phalluswithcarinae,
-        filepath: req.body.filepath
-      }
-    },
-    function(err) {
-      if (err) {
-        console.log(err);
+  Nepti.findById(req.body.id, function(err, foundNepti) {
+    if (err) {
+      console.log("Error...");
+      console.log(err);
+    } else {
+      if (foundNepti) {
+        foundNepti.species = req.body.species,
+        foundNepti.region = req.body.region,
+        foundNepti.filepath = req.body.filepath
+
+        if (req.body.hostplantfamily != null) {
+          foundNepti.hostplantfamily = req.body.hostplantfamily
+        }
+        if (req.body.forewing != null) {
+          foundNepti.forewing = req.body.forewing
+        }
+        if (req.body.tegumen != null) {
+          foundNepti.tegumen = req.body.tegumen
+        }
+        if (req.body.uncus != null) {
+          foundNepti.uncus = req.body.uncus
+        }
+        if (req.body.gnathos != null) {
+          foundNepti.gnathos = req.body.gnathos
+        }
+        if (req.body.valva != null) {
+          foundNepti.valva = req.body.valva
+        }
+        if (req.body.juxta != null) {
+          foundNepti.juxta = req.body.juxta
+        }
+        if (req.body.transtilla != null) {
+          foundNepti.transtilla = req.body.transtilla
+        }
+        if (req.body.vinculum != null) {
+          foundNepti.vinculum = req.body.vinculum
+        }
+        if (req.body.phalluswithoutcarinae != null) {
+          foundNepti.phalluswithoutcarinae = req.body.phalluswithoutcarinae
+        }
+        if (req.body.phalluswithcarinae != null) {
+          foundNepti.phalluswithcarinae = req.body.phalluswithcarinae
+        }
+
+        foundNepti.save(function(err) {
+          if (!err) {
+            console.log("Succesfully  updated");
+            res.redirect("/database");
+          }
+        });
       } else {
-        console.log("Succesfully updated item");
-        //console.log(req.body.region);
-        res.redirect("/database");
+        console.log("Nepti does'f found");
       }
     }
-  );
+  });
 });
 
 app.use('/*/*', (req, res) => {
@@ -317,7 +342,6 @@ app.use('*', (req, res) => {
     res.render("404");
   }
 });
-
 
 app.listen(3000, function() {
   console.log("Diagnostics App has started successfully");

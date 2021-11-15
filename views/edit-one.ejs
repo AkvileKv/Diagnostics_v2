@@ -12,14 +12,14 @@
         <p class="records-text"><%=nepti.species%></p>
 
         <p class="database-result"><span class="bold">Id:</span>
-          <input type="text" class="form-control  database-result" name="id"  value="<%=nepti._id%>" readonly="readonly">
+          <input type="text" class="form-control  database-result" name="id" value="<%=nepti._id%>" readonly="readonly">
         </p>
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">SPECIES</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <input type="text" class="form-control form-control-lg" name="species" value="<%=nepti.species%>" readonly="readonly">
+            <input type="text" class="form-control form-control-lg" name="species" value="<%=nepti.species%>">
           </div>
         </div>
         <div class="form-row">
@@ -39,71 +39,235 @@
         </div>
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
-            <label for="inputState">SPECIES</label>
+            <label for="inputState">FILE PATH</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <input type="text" class="form-control form-control-lg" name="species" value="<%=nepti.species%>" readonly="readonly">
+            <input type="text" class="form-control form-control-lg" name="filepath" value="<%=nepti.filepath%>">
           </div>
         </div>
+
+<p class="red-color">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options below</p>
         <p class="database-result"><span class="bold">Hostplant family:</span>
-          <input type="text" class="form-control database-result" name="hostplantfamily" value="<%=nepti.hostplantfamily%>">
-        </p>
-        <p class="database-result"><span class="bold">Forewing:</span>
-          <input type="text" class="form-control database-result" name="forewing" value="<%=nepti.forewing%>">
-        </p>
-        <p class="database-result"><span class="bold">Tegumen:</span>
-          <input type="text" class="form-control database-result" name="tegumen" value="<%=nepti.tegumen%>" readonly="readonly" >
+            <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.hostplantfamily%></textarea>
         </p>
         <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">HOST-PLANT FAMILY</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12 character-select">
+            <select name="hostplantfamily" class="select-gray form-select form-control" multiple>
+              <option class="others" value="Not selected or unknown">Not selected or unknown</option>
+              <option class="others" value="Anacardiaceae">Anacardiaceae</option>
+              <option class="others" value="Asteraceae">Asteraceae</option>
+              <option class="others" value="Betulaceae">Betulaceae</option>
+              <option class="others" value="Ericaceae">Ericaceae</option>
+              <option class="others" value="Fabaceae">Fabaceae</option>
+              <option class="others" value="Fagaceae">Fagaceae</option>
+              <option class="others" value="Lamiaceae">Lamiaceae</option>
+              <option class="others" value="Malvaceae">Malvaceae</option>
+              <option class="others" value="Myrtaceae">Myrtaceae</option>
+              <option class="others" value="Rhamnaceae">Rhamnaceae</option>
+              <option class="others" value="Rosaceae">Rosaceae</option>
+              <option class="others" value="Salicaceae">Salicaceae</option>
+              <option class="others" value="Sapindaceae (=Aceraceae)">Sapindaceae (=Aceraceae)</option>
+              <option class="others" value="Ulmaceae (=Cannabaceae)">Ulmaceae (=Cannabaceae)</option>
+              <option class="others" value="Urticaceae">Urticaceae</option>
+              <option class="others" value="Another family, not included in this list">Another family, not included in this list</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="database-result"><span class="bold">Forewing:</span>
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.forewing%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">FOREWING</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="forewing" class="select-gray2 form-select form-control" multiple>
+              <option class="others" value="Without a pattern, almost uniform">Without a pattern, almost uniform</option>
+              <option class="others" value="With a conspicuous fascia(e) but no spots">With a conspicuous fascia(e) but no spots</option>
+              <option class="others" value="With a dark, false fascia(e)">With a dark, false fascia(e)</option>
+              <option class="others" value="With a spot(s) but no fascia">With a spot(s) but no fascia</option>
+              <option class="others" value="With a fascia and spot(s)">With a fascia and spot(s)</option>
+              <option class="others" value="Irrorated or sparsely speckled">Irrorated or sparsely speckled</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="database-result"><span class="bold">Tegumen:</span> </p>
+        <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.tegumen%></textarea>
+
+        <!-- <p class="database-result" for="myCheck">Checked for changes:</p>
+        <input type="checkbox" id="myCheck" onclick="myFunction()"> -->
+
+        <div class="form-row" id="textTegumen" >
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">TEGUMEN</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <select name="ntegumen" class="select-gray3 form-select form-control" multiple>
-              <option class="others" <%if (nepti.tegumen === "Band-shaped, pseuduncus absent") { %> selected <% } %> value="Band-shaped, pseuduncus absent">Band-shaped, pseuduncus absent</option>
-              <option class="others" <%if (nepti.tegumen === "Extended into a one-lobed pseuduncus") { %> selected <% } %> value="Extended into a one-lobed pseuduncus">Extended into a one-lobed pseuduncus</option>
-              <option class="others" <%if (nepti.tegumen === "Extended into a bifid or trifid pseuduncus") { %> selected <% } %> value="Extended into a bifid or trifid pseuduncus">Extended into a bifid or trifid pseuduncus</option>
+            <select name="tegumen" class="select-gray3 form-select form-control" multiple>
+              <option class="others" value="Band-shaped, pseuduncus absent">Band-shaped, pseuduncus absent</option>
+              <option class="others" value="Extended into a one-lobed pseuduncus">Extended into a one-lobed pseuduncus</option>
+              <option class="others" value="Extended into a bifid or trifid pseuduncus">Extended into a bifid or trifid pseuduncus</option>
             </select>
           </div>
         </div>
+
         <p class="database-result"><span class="bold">Uncus:</span>
-          <input type="text" class="form-control database-result" name="uncus" value="<%=nepti.uncus%>">
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.uncus%></textarea>
         </p>
-        <p class="database-result"><span class="bold">Gnathos:</span>
-          <input type="text" class="form-control database-result" name="gnathos" value="<%=nepti.gnathos%>">
-        </p>
-        <p class="database-result"><span class="bold">Valva:</span>
-          <input type="text" class="form-control   database-result" name="valva" value="<%=nepti.valva%>">
-        </p>
-        <p class="database-result"><span class="bold">Juxta: </span>
-          <input type="text" class="form-control database-result" name="juxta" value="<%=nepti.juxta%>">
-        </p>
-        <p class="database-result"><span class="bold">Transtilla:</span>
-          <input type="text" class="form-control database-result" name="transtilla" value="<%=nepti.transtilla%>">
-        </p>
-        <p class="database-result"><span class="bold">Vinculum:</span>
-          <input type="text" class="form-control database-result" name="vinculum" value="<%=nepti.vinculum%>">
-        </p>
-        <p class="database-result"><span class="bold">Phallus without Carinae:</span>
-          <input type="text" class="form-control   database-result" name="phalluswithoutcarinae" value="<%=nepti.phalluswithoutcarinae%>">
-        </p>
-        <p class="database-result"><span class="bold">Phallus with Carinae:</span>
-          <input type="text" class="form-control database-result" name="phalluswithcarinae" value="<%=nepti.phalluswithcarinae%>">
-        </p>
-        <p class="database-result"><span class="bold">Image URL:</span>
-          <input type="text" class="form-control database-result" name="filepath" value="<%=nepti.filepath%>">
-        </p>
-      </div>
-
-        <!-- <button type="submit" onclick="return confirm('Are you sure you want to update this record?');" class="btn yellow-button w-50">UPDATE</button>
-        <a class="btn btn-dark btn-lg" role="button" href="/edit">Cancel</a> -->
-
-        <div class="">
-          <div class="btn-group" role="group" aria-label="Basic example" id="group">
-              <button type="submit" onclick="return confirm('Are you sure you want to update this record?');" class="btn yellow-button w-50">UPDATE</button>
-              <a type="button" class="btn btn-secondary" href="/edit">Cancel</a>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">UNCUS</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="uncus" class="select-gray4 form-select form-control" multiple>
+              <option class="others" value="One-lobed">One-lobed</option>
+              <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
+              <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
+              <option class="others" value="Inverted Y- or V-shaped">Inverted Y- or V-shaped</option>
+              <option class="others" value="Other">Other</option>
+              <option class="others" value="Uncus absent">Uncus absent</option>
+            </select>
           </div>
         </div>
+        <p class="database-result"><span class="bold">Gnathos:</span>
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.gnathos%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">GNATHOS</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="gnathos" class="select-gray5 form-select form-control" multiple>
+              <option class="others" value="Widely U-shaped">Widely U-shaped</option>
+              <option class="others" value="Inverted V- or Y-shaped">Inverted V- or Y-shaped</option>
+              <option class="others" value="With one short caudal process or lobe">With one short caudal process or lobe</option>
+              <option class="others" value="With one long caudal process">With one long caudal process</option>
+              <option class="others" value="With two long caudal processes">With two long caudal processes</option>
+              <option class="others" value="H-shaped, with conspicuous anterior processes">H-shaped, with conspicuous anterior processes</option>
+              <option class="others" value="With a large caudal lobe">With a large caudal lobe</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Valva:</span>
+          <textarea type="text" rows="1" class="form-control   database-result" name="" readonly="readonly"><%=nepti.valva%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">VALVA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="valva" class="select-gray6 form-select form-control" multiple>
+              <option class="others" value="Without an apical process">Without an apical process</option>
+              <option class="others" value="With one short or medium short apical process">With one short or medium short apical process</option>
+              <option class="others" value="With one long or very long apical process">With one long or very long apical process</option>
+              <option class="others" value="With two apical processes">With two apical processes</option>
+              <option class="others" value="With a median or basal, slender or lobe-like process(es)">With a median or basal, slender or lobe-like process(es)</option>
+              <option class="others" value="Valva deeply divided, two-folded">Valva deeply divided, two-folded</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Juxta: </span>
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.juxta%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">JUXTA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="juxta" class="select-gray7 form-select form-control" multiple>
+              <option class="others" value="Absent or mostly membranous, inconspicuous">Absent or mostly membranous, inconspicuous</option>
+              <option class="others" value="Distinctly thickened, at least partially">Distinctly thickened, at least partially</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Transtilla:</span>
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.transtilla%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">TRANSTILLA</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="transtilla" class="select-gray8 form-select form-control" multiple>
+              <option class="others" value="Without sublateral processes">Without sublateral processes</option>
+              <option class="others" value="With short or weakly differentiated processes">With short or weakly differentiated processes</option>
+              <option class="others" value="With long but slender sublateral processes">With long but slender sublateral processes</option>
+              <option class="others" value="With long but wide sublateral processes">With long but wide sublateral processes</option>
+              <option class="others" value="Absent">Absent</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Vinculum:</span>
+        <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.vinculum%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-lg-4 col-md-6 col-sm-12 character-name">
+            <label for="inputState">VINCULUM</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="vinculum" class="select-gray9 form-select form-control" multiple>
+              <option class="others" value="Short or medium short; lateral lobes short or absent">Short or medium short; lateral lobes short or absent</option>
+              <option class="others" value="Short or medium short; lateral lobes long">Short or medium short; lateral lobes long</option>
+              <option class="others" value="Long or very long, with lateral lobes">Long or very long, with lateral lobes</option>
+              <option class="others" value="Long or very long, without lateral lobes">Long or very long, without lateral lobes</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Phallus without Carinae:</span>
+          <textarea type="text" rows="1" class="form-control   database-result" name="" readonly="readonly"><%=nepti.phalluswithoutcarinae%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-md-4 col-sm-12 character-name">
+            <label for="inputState">PHALLUS WITHOUT DISTINCTIVE CARINAE</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="phalluswithoutcarinae" class="select-gray10 form-select form-control" multiple>
+              <option class="others" value="Without cornuti or only a few small cornuti">Without cornuti or only a few small cornuti</option>
+              <option class="others" value="With numerous small but loose cornuti">With numerous small but loose cornuti</option>
+              <option class="others" value="With numerous small cornuti in a compact band(s)">With numerous small cornuti in a compact band(s)</option>
+              <option class="others" value="With several spine-like but loose cornuti">With several spine-like but loose cornuti</option>
+              <option class="others" value="With many large but loose cornuti">With many large but loose cornuti</option>
+              <option class="others" value="With many large + small but loose cornuti">With many large + small but loose cornuti</option>
+              <option class="others" value="With large or large + small cornuti in a compact band">With large or large + small cornuti in a compact band</option>
+              <option class="others" value="With differentiated cornuti in separate clusters">With differentiated cornuti in separate clusters</option>
+              <option class="others" value="With 1–3 loose horn-like cornuti">With 1–3 loose horn-like cornuti</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <p class="database-result"><span class="bold">Phallus with Carinae:</span>
+          <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.phalluswithcarinae%></textarea>
+        </p>
+        <div class="form-row">
+          <div class="col-md-4 col-sm-12 character-name">
+            <label for="inputState">PHALLUS WITH DISTINCTIVE CARINAE</label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <select name="phalluswithcarinae" class="select-gray11 form-select form-control" multiple>
+              <option class="others" value="With only ventral carinae and without or a very few cornuti">With only ventral carinae and without or a very few cornuti</option>
+              <option class="others" value="With only two dentate plates and without or very few cornuti">With only two dentate plates and without or very few cornuti</option>
+              <option class="others" value="With ventral + lateral carinae and without or some very small cornuti">With ventral + lateral carinae and without or some very small cornuti</option>
+              <option class="others" value="With ventral and/or lateral carinae and horn-like + small cornuti">With ventral and/or lateral carinae and horn-like + small cornuti</option>
+              <option class="others" value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="">
+        <div class="btn-group" role="group" aria-label="Basic example" id="group">
+          <button type="submit" onclick="return confirm('Are you sure you want to update this record?');" class="btn yellow-button w-50">UPDATE</button>
+          <a type="button" class="btn btn-secondary" href="/edit">Cancel</a>
+        </div>
+      </div>
 
     </form>
 
@@ -112,3 +276,15 @@
 
 
 <%- include('partials/footer') %>
+
+<script type="text/javascript">
+  function myFunction() {
+    var checkBox = document.getElementById("myCheck");
+    var text = document.getElementById("textTegumen");
+    if (checkBox.checked == true) {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
+</script>
