@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: String,
-  password: String
+  password: String,
+  role: String
 });
 
 userSchema.plugin(passportLocalMongoose); //to hash and salt password

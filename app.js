@@ -4,7 +4,9 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session');
-const { v4: uuidv4 } = require('uuid'); // uuid, To call: uuidv4();
+const {
+  v4: uuidv4
+} = require('uuid'); // uuid, To call: uuidv4();
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 //onst _ = require("lodash");
@@ -18,6 +20,7 @@ const loginRouter = require('./controllers/login');
 const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
+const notFund404_adminRouter = require('./controllers/404-admin');
 // const databaseRouter = require('./controllers/database');
 
 const app = express();
@@ -35,6 +38,7 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
 app.use("/404-user", notFund404_userRouter);
+app.use("/404-admin", notFund404_adminRouter);
 app.use("/s-central-asia", searchRouter);
 app.use("/s-central-america", searchRouter);
 app.use("/s-continental-east-asia", searchRouter);
@@ -47,13 +51,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-  genid: function (req) {
+  genid: function(req) {
     return uuidv4();
   },
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60 * 60 * 1000, secure: false } // 1 hour
+  cookie: {
+    maxAge: 60 * 60 * 1000,
+    secure: false
+  } // 1 hour
 }));
 
 app.use(passport.initialize());
@@ -79,30 +86,24 @@ app.post("/register", (req, res) => {
     if (err) {
       console.log(err);
     }
-    let message;
     if (user) {
-      //console.log(user);
-      message = "User exists";
-      console.log(message);
+      console.log("User exists");
       res.redirect("/register");
     } else {
-      // console.log(user);
-      //   message= "user doesn't exist";
-      //   console.log(message);
       User.register({
-        username: req.body.username
+        username: req.body.username,
+        role: "user"
       }, req.body.password, function(err, user) {
         if (err) {
           console.log(err);
           res.redirect("/register");
         } else {
           passport.authenticate("local")(req, res, function() {
-            res.redirect("/database");
-          }, );
+            res.redirect("/all-records");
+          });
         }
       });
     }
-    // res.json({message: message});
   });
 
 });
@@ -133,14 +134,57 @@ app.get("/search-the-himalaya", (req, res) => {
 app.get("/database", (req, res) => {
 
   if (req.isAuthenticated()) {
-    Nepti.find({}, function(err, neptis) {
+    User.findById(req.user.id, function(err, foundUser) {
       if (err) {
+        console.log("Error...");
         console.log(err);
       } else {
-        console.log("Turi isvesti rezultatus");
-        res.render("database", {
-          neptis: neptis
-        });
+        if (foundUser.role === "admin") {
+          Nepti.find({}, function(err, neptis) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Turi isvesti rezultatus");
+              res.render("database", {
+                neptis: neptis
+              });
+            }
+          });
+        } else {
+          console.log("User role unknown");
+          res.redirect("/404-user");
+        }
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/all-records", (req, res) => {
+
+  if (req.isAuthenticated()) {
+
+    User.findById(req.user.id, function(err, foundUser) {
+      if (err) {
+        console.log("Error...");
+        console.log(err);
+      } else {
+        if (foundUser.role === "user") {
+          Nepti.find({}, function(err, neptis) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Turi isvesti rezultatus");
+              res.render("all-records", {
+                neptis: neptis
+              });
+            }
+          });
+        } else {
+          console.log("User role unknown");
+          res.redirect("/404-admin");
+        }
       }
     });
   } else {
@@ -150,7 +194,19 @@ app.get("/database", (req, res) => {
 
 app.get("/create", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("create");
+    User.findById(req.user.id, function(err, foundUser) {
+      if (err) {
+        console.log("Error...");
+        console.log(err);
+      } else {
+        if (foundUser.role === "admin") {
+          res.render("create");
+        } else {
+          console.log("User role unknown");
+          res.redirect("/404-user");
+        }
+      }
+    });
   } else {
     res.redirect("/login");
   }
@@ -159,13 +215,26 @@ app.get("/create", (req, res) => {
 app.get("/edit", (req, res) => {
 
   if (req.isAuthenticated()) {
-    Nepti.find({}, function(err, neptis) {
+
+    User.findById(req.user.id, function(err, foundUser) {
       if (err) {
+        console.log("Error...");
         console.log(err);
       } else {
-        res.render("edit", {
-          neptis: neptis
-        });
+        if (foundUser.role === "admin") {
+          Nepti.find({}, function(err, neptis) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("edit", {
+                neptis: neptis
+              });
+            }
+          });
+        } else {
+
+          res.redirect("/404-user");
+        }
       }
     });
   } else {
@@ -191,24 +260,37 @@ app.post("/delete", function(req, res) {
 app.get("/edit/:neptiId", (req, res) => {
   //console.log("neptiID");
   if (req.isAuthenticated()) {
-    const requestedId = req.params.neptiId;
-    if (requestedId.match(/^[0-9a-fA-F]{24}$/)) {
-      // Yes, it's a valid ObjectId, proceed with `findById` call.
 
-      Nepti.findById((requestedId), function(err, nepti) {
-        if (err) {
-          console.log("error");
-          console.log(err);
-          res.redirect("/404-user");
+    User.findById(req.user.id, function(err, foundUser) {
+      if (err) {
+        console.log("Error...");
+        console.log(err);
+      } else {
+        if (foundUser.role === "admin") {
+          const requestedId = req.params.neptiId;
+          if (requestedId.match(/^[0-9a-fA-F]{24}$/)) {
+            // Yes, it's a valid ObjectId, proceed with `findById` call.
+
+            Nepti.findById((requestedId), function(err, nepti) {
+              if (err) {
+                console.log("error");
+                console.log(err);
+                res.redirect("/404-admin");
+              } else {
+                res.render("edit-one", {
+                  nepti: nepti
+                });
+              }
+            });
+          } else {
+            res.redirect("/404-admin");
+          }
         } else {
-          res.render("edit-one", {
-            nepti: nepti
-          });
+          console.log("User role unknown");
+          res.redirect("/404-user");
         }
-      });
-    } else {
-      res.redirect("/404");
-    }
+      }
+    });
   } else {
     res.redirect("/login");
   }
@@ -224,15 +306,26 @@ app.post("/login", (req, res) => {
 
   // to log in and authenticate it. login Method comes from passport
   req.login(user, function(err) {
-    //console.log(user);
     if (err) {
       console.log(err);
     } else {
-      //console.log("else viduje");
-      //toliau nepraeina, jei nera anksciau DB sukurtas
-      passport.authenticate("local", { failureRedirect: '/login' })(req, res, function() {
-        //console.log("authenticate viduje");
-        res.redirect("/database");
+      passport.authenticate("local", {
+        failureRedirect: '/login'
+      })(req, res, function() {
+
+        User.findById(req.user.id, function(err, foundUser) {
+          if (err) {
+            console.log("Error...");
+            console.log(err);
+          } else {
+            if (foundUser.role === "admin") {
+              res.redirect("/database");
+            } else if (foundUser.role === "user") {
+              console.log("User role: user");
+              res.redirect("/all-records");
+            }
+          }
+        });
       });
     }
   });
@@ -241,22 +334,22 @@ app.post("/login", (req, res) => {
 //------------create.ejs formoj ivedu nauja irasa ir nukreipiu i /database--------
 app.post("/create", (req, res) => {
 
-      const nepti = new Nepti({
-        region: req.body.region,
-        species: req.body.species,
-        hostplantfamily: req.body.hostplantfamily,
-        forewing : req.body.forewing,
-        tegumen : req.body.tegumen,
-        uncus : req.body.uncus,
-        gnathos: req.body.gnathos,
-        valva: req.body.valva,
-        juxta: req.body.juxta,
-        transtilla: req.body.transtilla,
-        vinculum: req.body.vinculum,
-        phalluswithoutcarinae: req.body.phalluswithoutcarinae,
-        phalluswithcarinae: req.body.phalluswithcarinae,
-        filepath: req.body.filepath
-      });
+  const nepti = new Nepti({
+    region: req.body.region,
+    species: req.body.species,
+    hostplantfamily: req.body.hostplantfamily,
+    forewing: req.body.forewing,
+    tegumen: req.body.tegumen,
+    uncus: req.body.uncus,
+    gnathos: req.body.gnathos,
+    valva: req.body.valva,
+    juxta: req.body.juxta,
+    transtilla: req.body.transtilla,
+    vinculum: req.body.vinculum,
+    phalluswithoutcarinae: req.body.phalluswithoutcarinae,
+    phalluswithcarinae: req.body.phalluswithcarinae,
+    filepath: req.body.filepath
+  });
 
   nepti.save(function(err) {
     if (!err) {
@@ -275,8 +368,8 @@ app.post("/update", (req, res) => {
     } else {
       if (foundNepti) {
         foundNepti.species = req.body.species,
-        foundNepti.region = req.body.region,
-        foundNepti.filepath = req.body.filepath
+          foundNepti.region = req.body.region,
+          foundNepti.filepath = req.body.filepath
 
         if (req.body.hostplantfamily != null) {
           foundNepti.hostplantfamily = req.body.hostplantfamily
@@ -327,8 +420,21 @@ app.post("/update", (req, res) => {
 
 app.use('/*/*', (req, res) => {
   if (req.isAuthenticated()) {
-    //console.log("paciam gale isoka i **");
-    res.render("404-user");
+    User.findById(req.user.id, function(err, foundUser) {
+      if (err) {
+        console.log("Error...");
+        console.log(err);
+      } else {
+        if (foundUser.role === "admin") {
+        res.render("404-admin");
+      } if else (foundUser.role === "user"){
+          res.render("404-user");
+        } else {
+          console.log("User role unknown");
+          res.redirect("/404");
+        }
+      }
+    });
   } else {
     res.render("404");
   }
@@ -336,8 +442,22 @@ app.use('/*/*', (req, res) => {
 
 app.use('*', (req, res) => {
   if (req.isAuthenticated()) {
-    //console.log("paciam gale isoka i *");
-    res.render("404-user");
+
+    User.findById(req.user.id, function(err, foundUser) {
+      if (err) {
+        console.log("Error...");
+        console.log(err);
+      } else {
+        if (foundUser.role === "admin") {
+        res.render("404-admin");
+      } if else (foundUser.role === "user"){
+          res.render("404-user");
+        } else {
+          console.log("User role unknown");
+          res.redirect("/404");
+        }
+      }
+    });
   } else {
     res.render("404");
   }
