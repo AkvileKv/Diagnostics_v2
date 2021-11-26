@@ -427,7 +427,7 @@ app.use('/*/*', (req, res) => {
       } else {
         if (foundUser.role === "admin") {
         res.render("404-admin");
-      } if else (foundUser.role === "user"){
+      } else if (foundUser.role === "user"){
           res.render("404-user");
         } else {
           console.log("User role unknown");
@@ -450,7 +450,7 @@ app.use('*', (req, res) => {
       } else {
         if (foundUser.role === "admin") {
         res.render("404-admin");
-      } if else (foundUser.role === "user"){
+      } else if (foundUser.role === "user"){
           res.render("404-user");
         } else {
           console.log("User role unknown");
