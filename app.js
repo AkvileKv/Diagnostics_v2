@@ -9,19 +9,20 @@ const {
 } = require('uuid'); // uuid, To call: uuidv4();
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-//onst _ = require("lodash");
+var fs = require('file-system');
+
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
 
 const homeRouter = require('./controllers/home');
 const citeRouter = require('./controllers/cite-us');
+const contactRouter = require('./controllers/contact-us');
 const searchRouter = require('./controllers/search');
 const loginRouter = require('./controllers/login');
 const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
 const notFund404_adminRouter = require('./controllers/404-admin');
-// const databaseRouter = require('./controllers/database');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(express.static("assets"));
 
 app.use("/", homeRouter);
 app.use("/cite-us", citeRouter);
+app.use("/contact-us", contactRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
@@ -44,7 +46,6 @@ app.use("/s-central-america", searchRouter);
 app.use("/s-continental-east-asia", searchRouter);
 app.use("/s-south-america", searchRouter);
 app.use("/s-the-himalaya", searchRouter);
-// app.use("/database", databaseRouter);
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -415,6 +416,15 @@ app.post("/update", (req, res) => {
         console.log("Nepti does'f found");
       }
     }
+  });
+});
+
+app.get("/morphology-guide", function(req, res) {
+  var pdfPath = "/uploads/MORPHOLOGY_GUIDE.pdf";
+
+  fs.readFile(__dirname + pdfPath, function(err, pdfData) {
+    res.contentType("application/pdf");
+    res.send(pdfData);
   });
 });
 

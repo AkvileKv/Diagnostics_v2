@@ -11,9 +11,9 @@
         <h1 class="display-3">Edit record</h1>
         <p class="records-text"><%=nepti.species%></p>
 
-        <p class="database-result"><span class="bold">Id:</span>
-          <input type="text" class="form-control  database-result" name="id" value="<%=nepti._id%>" readonly="readonly">
-        </p>
+        <!-- <p class="database-result"><span class="bold">Id:</span> -->
+          <input type="text" class="form-control  database-result" name="id" value="<%=nepti._id%>" readonly="readonly" hidden="hidden">
+        <!-- </p> -->
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">SPECIES</label>
@@ -56,6 +56,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12 character-select">
             <select name="hostplantfamily" class="select-gray form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Not selected or unknown">Not selected or unknown</option>
               <option class="others" value="Anacardiaceae">Anacardiaceae</option>
               <option class="others" value="Asteraceae">Asteraceae</option>
@@ -86,6 +87,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="forewing" class="select-gray2 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Without a pattern, almost uniform">Without a pattern, almost uniform</option>
               <option class="others" value="With a conspicuous fascia(e) but no spots">With a conspicuous fascia(e) but no spots</option>
               <option class="others" value="With a dark, false fascia(e)">With a dark, false fascia(e)</option>
@@ -97,18 +99,16 @@
           </div>
         </div>
 
-        <p class="database-result"><span class="bold">Tegumen:</span> </p>
+        <p class="database-result"><span class="bold">Tegumen:</span>
         <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.tegumen%></textarea>
-
-        <!-- <p class="database-result" for="myCheck">Checked for changes:</p>
-        <input type="checkbox" id="myCheck" onclick="myFunction()"> -->
-
+        </p>
         <div class="form-row" id="textTegumen" >
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">TEGUMEN</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="tegumen" class="select-gray3 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Band-shaped, pseuduncus absent">Band-shaped, pseuduncus absent</option>
               <option class="others" value="Extended into a one-lobed pseuduncus">Extended into a one-lobed pseuduncus</option>
               <option class="others" value="Extended into a bifid or trifid pseuduncus">Extended into a bifid or trifid pseuduncus</option>
@@ -125,6 +125,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="uncus" class="select-gray4 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="One-lobed">One-lobed</option>
               <option class="others" value="Bilobed or with 2 conspicuous papillae">Bilobed or with 2 conspicuous papillae</option>
               <option class="others" value="With 3–4 conspicuous papillae">With 3–4 conspicuous papillae</option>
@@ -143,6 +144,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="gnathos" class="select-gray5 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Widely U-shaped">Widely U-shaped</option>
               <option class="others" value="Inverted V- or Y-shaped">Inverted V- or Y-shaped</option>
               <option class="others" value="With one short caudal process or lobe">With one short caudal process or lobe</option>
@@ -163,6 +165,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="valva" class="select-gray6 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Without an apical process">Without an apical process</option>
               <option class="others" value="With one short or medium short apical process">With one short or medium short apical process</option>
               <option class="others" value="With one long or very long apical process">With one long or very long apical process</option>
@@ -182,6 +185,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="juxta" class="select-gray7 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Absent or mostly membranous, inconspicuous">Absent or mostly membranous, inconspicuous</option>
               <option class="others" value="Distinctly thickened, at least partially">Distinctly thickened, at least partially</option>
             </select>
@@ -196,6 +200,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="transtilla" class="select-gray8 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Without sublateral processes">Without sublateral processes</option>
               <option class="others" value="With short or weakly differentiated processes">With short or weakly differentiated processes</option>
               <option class="others" value="With long but slender sublateral processes">With long but slender sublateral processes</option>
@@ -213,6 +218,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="vinculum" class="select-gray9 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Short or medium short; lateral lobes short or absent">Short or medium short; lateral lobes short or absent</option>
               <option class="others" value="Short or medium short; lateral lobes long">Short or medium short; lateral lobes long</option>
               <option class="others" value="Long or very long, with lateral lobes">Long or very long, with lateral lobes</option>
@@ -229,6 +235,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="phalluswithoutcarinae" class="select-gray10 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="Without cornuti or only a few small cornuti">Without cornuti or only a few small cornuti</option>
               <option class="others" value="With numerous small but loose cornuti">With numerous small but loose cornuti</option>
               <option class="others" value="With numerous small cornuti in a compact band(s)">With numerous small cornuti in a compact band(s)</option>
@@ -251,6 +258,7 @@
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
             <select name="phalluswithcarinae" class="select-gray11 form-select form-control" multiple>
+              <option class="others" value=""></option>
               <option class="others" value="With only ventral carinae and without or a very few cornuti">With only ventral carinae and without or a very few cornuti</option>
               <option class="others" value="With only two dentate plates and without or very few cornuti">With only two dentate plates and without or very few cornuti</option>
               <option class="others" value="With ventral + lateral carinae and without or some very small cornuti">With ventral + lateral carinae and without or some very small cornuti</option>
@@ -276,15 +284,3 @@
 
 
 <%- include('partials/footer') %>
-
-<script type="text/javascript">
-  function myFunction() {
-    var checkBox = document.getElementById("myCheck");
-    var text = document.getElementById("textTegumen");
-    if (checkBox.checked == true) {
-      text.style.display = "block";
-    } else {
-      text.style.display = "none";
-    }
-  }
-</script>
