@@ -10,6 +10,7 @@ const {
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 var fs = require('file-system');
+const fileUpload = require('express-fileupload');
 
 const Nepti = require('./models/nepti');
 const User = require('./models/user');
@@ -46,6 +47,8 @@ app.use("/s-central-america", searchRouter);
 app.use("/s-continental-east-asia", searchRouter);
 app.use("/s-south-america", searchRouter);
 app.use("/s-the-himalaya", searchRouter);
+
+app.use(fileUpload());
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -335,6 +338,31 @@ app.post("/login", (req, res) => {
 //------------create.ejs formoj ivedu nauja irasa ir nukreipiu i /database--------
 app.post("/create", (req, res) => {
 
+  let uploadPath;
+  let filePath;
+  let sampleFile;
+
+  // if (!req.files || Object.keys(req.files).length === 0) {
+  //   return res.status(400).send('No files were uploaded.');
+  // }
+  if (!req.files || Object.keys(req.files).length === 0) {
+    filePath = "No image to show";
+  }
+  else {
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.sampleFile;
+    uploadPath = __dirname + '/uploads/images/' + sampleFile.name;
+    filePath = 'images/' + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(uploadPath, function(err) {
+      if (err)
+        return res.status(500).send(err);
+
+      //res.send('File uploaded!');
+    });
+  }
+
   const nepti = new Nepti({
     region: req.body.region,
     species: req.body.species,
@@ -349,7 +377,7 @@ app.post("/create", (req, res) => {
     vinculum: req.body.vinculum,
     phalluswithoutcarinae: req.body.phalluswithoutcarinae,
     phalluswithcarinae: req.body.phalluswithcarinae,
-    filepath: req.body.filepath
+    filepath: filePath
   });
 
   nepti.save(function(err) {
@@ -362,6 +390,23 @@ app.post("/create", (req, res) => {
 
 app.post("/update", (req, res) => {
 
+  let uploadPath;
+  let filePath;
+  let newImageFile;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+
+  } else {
+    newImageFile = req.files.newImageFile;
+    uploadPath = __dirname + '/uploads/images/' + newImageFile.name;
+    filePath = 'images/' + newImageFile.name;
+
+    newImageFile.mv(uploadPath, function(err) {
+      if (err)
+        return res.status(500).send(err);
+    });
+  }
+
   Nepti.findById(req.body.id, function(err, foundNepti) {
     if (err) {
       console.log("Error...");
@@ -369,8 +414,11 @@ app.post("/update", (req, res) => {
     } else {
       if (foundNepti) {
         foundNepti.species = req.body.species,
-          foundNepti.region = req.body.region,
-          foundNepti.filepath = req.body.filepath
+          foundNepti.region = req.body.region
+
+        if (filePath != null) {
+          foundNepti.filepath = filePath
+        }
 
         if (req.body.hostplantfamily != null) {
           foundNepti.hostplantfamily = req.body.hostplantfamily
@@ -418,6 +466,29 @@ app.post("/update", (req, res) => {
     }
   });
 });
+
+// app.post('/upload', function(req, res) {
+//
+//   let sampleFile;
+//   let uploadPath;
+//
+//   if (!req.files || Object.keys(req.files).length === 0) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
+//
+//   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+//   sampleFile = req.files.sampleFile;
+//   uploadPath = __dirname + '/uploads/images/' + sampleFile.name;
+//
+//   // Use the mv() method to place the file somewhere on your server
+//   sampleFile.mv(uploadPath, function(err) {
+//     if (err)
+//       return res.status(500).send(err);
+//
+//     //res.send('File uploaded!');
+//   });
+//
+// });
 
 app.get("/morphology-guide", function(req, res) {
   var pdfPath = "/uploads/MORPHOLOGY_GUIDE.pdf";

@@ -8,9 +8,17 @@
     <h1 class="display-3">Create new</h1>
     <p class="records-text">NeptiDB</p>
 
-    <form action="/create" method="post">
+    <!-- <form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType="multipart/form-data">
+      <input type="file" name="sampleFile" />
+      <input type='submit' value='Upload!' />
+    </form> -->
+
+    <form action="/create" method="post" encType="multipart/form-data">
 
       <div class="form-group">
+
+
+        <!-- <input type='submit' value='Upload!' /> -->
 
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
@@ -38,10 +46,11 @@
         </div>
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
-            <label for="inputState">FILE PATH</label>
+            <label for="inputState">IMAGE</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <input type="text" class="form-control form-control-lg" name="filepath" placeholder="">
+                <input type="file" name="sampleFile" accept="image/png, image/jpeg" class="form-control form-control-lg">
+            <!-- <input type="text" class="form-control form-control-lg" name="filepath" placeholder=""> -->
           </div>
         </div>
 <p class="red-color">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options below</p>

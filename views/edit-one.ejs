@@ -4,16 +4,15 @@
 <div class="container">
   <div class="jumbotron text-center">
 
-    <form action="/update" method="post">
+    <form action="/update" method="post" encType="multipart/form-data">
 
       <div class="form-group">
         <i class="fas fa-pen-square fa-6x"></i>
         <h1 class="display-3">Edit record</h1>
         <p class="records-text"><%=nepti.species%></p>
 
-        <!-- <p class="database-result"><span class="bold">Id:</span> -->
           <input type="text" class="form-control  database-result" name="id" value="<%=nepti._id%>" readonly="readonly" hidden="hidden">
-        <!-- </p> -->
+
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
             <label for="inputState">SPECIES</label>
@@ -37,12 +36,17 @@
             </select>
           </div>
         </div>
+
+        <p class="database-result"><span class="bold">Image path:</span>
+            <textarea type="text" rows="1" class="form-control database-result" name="" readonly="readonly"><%=nepti.filepath%></textarea>
+        </p>
         <div class="form-row">
           <div class="col-lg-4 col-md-6 col-sm-12 character-name">
-            <label for="inputState">FILE PATH</label>
+            <label for="inputState">IMAGE</label>
           </div>
           <div class="col-lg-8 col-md-6 col-sm-12">
-            <input type="text" class="form-control form-control-lg" name="filepath" value="<%=nepti.filepath%>">
+            <input type="file" name="newImageFile" accept="image/png, image/jpeg" class="form-control form-control-lg">
+            <!-- <input type="text" class="form-control form-control-lg" name="filepath" value="<%=nepti.filepath%>"> -->
           </div>
         </div>
 
