@@ -110,10 +110,29 @@ router.get("/", function(req, res) {
     vinculum: selectedVinculum,
     phalluswithoutcarinae: selectedPhallusWithoutCarinae,
     phalluswithcarinae: selectedPhallusWithCarinae
-  }, function(err, neptis) {
+  },
+  // function(err, rows, fields) {
+  // if (err) throw err;
+  // var data=[];
+  // for(i=0;i<rows.length;i++)
+  // {
+  // data.push(rows[i].first_name);
+  // }
+  // res.end(JSON.stringify(data));
+  // });
+  function(err, neptis) {
+
     if (err) {
       console.log(err);
     } else {
+
+      var data=[]; // save all species for region
+      for(i=0; i<neptis.length; i++)
+      {
+      data.push(neptis[i].species);
+      console.log(data[i]);
+      }
+
       // console.log("Paieskos parametrai - " + " typedSpecies: " + typedSpecies + " defaultRegion: " + defaultRegion +
       //   " and selectedHostPlantFamily: " + selectedHostPlantFamily + " and selectedForewing: " +
       //   selectedForewing + " and selectedTegumen: " + selectedTegumen + " and selectedUncus: " +

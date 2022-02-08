@@ -24,6 +24,7 @@ const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
 const notFund404_adminRouter = require('./controllers/404-admin');
+//const searchByWordRouter = require('./controllers/search-by-word');
 
 const app = express();
 
