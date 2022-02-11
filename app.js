@@ -120,19 +120,111 @@ app.get("/logout", function(req, res) {
 
 //-----------pagal URL / atvaizduoja search.ejs --------
 app.get("/search-central-asia", (req, res) => {
-  res.render("s-central-asia");
+  let defaultRegion = "Central Asia";
+  Nepti.find({
+    region: defaultRegion
+  },
+  function(err, neptis) {
+    if (err) {
+      console.log(err);
+    } else {
+      var allSpecies=[];
+      for(i=0; i<neptis.length; i++)
+      {
+      allSpecies.push(neptis[i].species);
+      console.log(allSpecies[i]);
+      }
+      res.render("s-central-asia", {
+        dataArray: JSON.stringify(allSpecies)
+      });
+    }
+  });
 });
 app.get("/search-central-america", (req, res) => {
-  res.render("s-central-america");
+
+  let defaultRegion = "Central America";
+  Nepti.find({
+    region: defaultRegion
+  },
+  function(err, neptis) {
+    if (err) {
+      console.log(err);
+    } else {
+      var allSpecies=[];
+      for(i=0; i<neptis.length; i++)
+      {
+      allSpecies.push(neptis[i].species);
+       console.log(allSpecies[i]);
+      }
+      res.render("s-central-america", {
+        dataArray: JSON.stringify(allSpecies)
+      });
+    }
+  });
 });
 app.get("/search-continental-east-asia", (req, res) => {
-  res.render("s-continental-east-asia");
+  let defaultRegion = "Continental East Asia";
+  Nepti.find({
+    region: defaultRegion
+  },
+  function(err, neptis) {
+    if (err) {
+      console.log(err);
+    } else {
+      var allSpecies=[];
+      for(i=0; i<neptis.length; i++)
+      {
+      allSpecies.push(neptis[i].species);
+       console.log(allSpecies[i]);
+      }
+      res.render("s-continental-east-asia", {
+        dataArray: JSON.stringify(allSpecies)
+      });
+    }
+  });
+
 });
 app.get("/search-south-america", (req, res) => {
-  res.render("s-south-america");
+  let defaultRegion = "South America";
+  Nepti.find({
+    region: defaultRegion
+  },
+  function(err, neptis) {
+    if (err) {
+      console.log(err);
+    } else {
+      var allSpecies=[];
+      for(i=0; i<neptis.length; i++)
+      {
+      allSpecies.push(neptis[i].species);
+       console.log(allSpecies[i]);
+      }
+      res.render("s-south-america", {
+        dataArray: JSON.stringify(allSpecies)
+      });
+    }
+  });
 });
 app.get("/search-the-himalaya", (req, res) => {
-  res.render("s-the-himalaya");
+  let defaultRegion = "The Himalaya";
+  Nepti.find({
+    region: defaultRegion
+  },
+  function(err, neptis) {
+    if (err) {
+      console.log(err);
+    } else {
+      var allSpecies=[];
+      for(i=0; i<neptis.length; i++)
+      {
+      allSpecies.push(neptis[i].species);
+       console.log(allSpecies[i]);
+      }
+      res.render("s-the-himalaya", {
+        dataArray: JSON.stringify(allSpecies)
+      });
+    }
+  });
 });
 
 //------------Randu ir isvedu visus irasus esancius DB--------
