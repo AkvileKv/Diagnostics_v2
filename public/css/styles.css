@@ -10,7 +10,7 @@ body {
 }
 
 p {
-  color: #000;
+  color: #323232;
 }
 
 /* autocomplete */
@@ -115,6 +115,10 @@ input[type=submit] {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+  /* about */
+  #about .container-fluid {
+    padding: 1% 7%;
+  }
   .empty-space1 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -122,8 +126,9 @@ input[type=submit] {
   /* carousel */
   .justify {
     text-align: justify;
-    padding: 8px 2%;
+    padding: 8px 11%;
     min-height: 120px;
+    line-height: 1.1;
   }
   .region-box {
     vertical-align: text-top;
@@ -159,6 +164,55 @@ input[type=submit] {
   background-color: #D2E1E6;
   margin-bottom: 0;
 }
+/* button */
+.yellow-button {
+  color: #000;
+  padding: 2px 45px 2px 45px;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: normal;
+  margin-top: 0.7rem;
+}
+/* RESULTS */
+.results-img {
+  height: 100%;
+  width: 100%;
+}
+.circle {
+  height: 3.3rem;
+  width: 3.3rem;
+  border-radius: 50%;
+  background-color: #7BA8AE;
+  color: #FFF;
+  text-align: center;
+  line-height: 1;
+  padding: 15px 1px 1px 1px;
+  text-decoration: none;
+  font-size: 70%;
+  position: fixed;
+  right: 1rem;
+  bottom: 3.45rem;
+}
+
+.circle-big {
+  height: 6.5rem;
+  width: 6.5rem;
+  border-radius: 50%;
+  background-color: #7BA8AE;
+  color: #FFF;
+  text-align: center;
+  line-height: 1;
+  padding: 38px 1px 1px 1px;
+  text-decoration: none;
+  font-size: 92%;
+}
+
+.found {
+  margin: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+}
 
 }
 /* galioja nuo 768 iki 576px (sm)*/
@@ -189,6 +243,7 @@ input[type=submit] {
     text-align: justify;
     padding: 15px 15%;
     min-height: 250px;
+    line-height: 1.5;
   }
   .region-box {
     vertical-align: text-top;
@@ -202,12 +257,31 @@ input[type=submit] {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
+  /* about */
+  #about .container-fluid {
+    padding: 1% 15%;
+  }
+  /* RESULTS */
+  .circle {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background-color: #7BA8AE;
+    color: #FFF;
+    text-align: center;
+    line-height: 1;
+    padding: 20px 1px 1px 1px;
+    text-decoration: none;
+    font-size: 75%;
+    position: fixed;
+    right: 1rem;
+    bottom: 4rem;
+  }
+
   /* -----SEARCH PAGE----- */
   .blue-space-search h1 {
     font-size: 300%;
   }
-
-
 
 
 }
@@ -260,6 +334,54 @@ input[type=submit] {
    background-color: #D2E1E6;
    margin-bottom: 1rem;
  }
+ /* RESULTS */
+ .results-img {
+   height: 60%;
+   width: 60%;
+ }
+ .circle {
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+   background-color: #7BA8AE;
+   color: #FFF;
+   text-align: center;
+   line-height: 1;
+   padding: 27px 1px 1px 1px;
+   text-decoration: none;
+   font-size: 80%;
+   position: fixed;
+   right: 1rem;
+   bottom: 5rem;
+ }
+
+ .circle-big {
+   height: 7rem;
+   width: 7rem;
+   border-radius: 50%;
+   background-color: #7BA8AE;
+   color: #FFF;
+   text-align: center;
+   line-height: 1;
+   padding: 47px 1px 1px 1px;
+   text-decoration: none;
+   font-size: 95%;
+ }
+
+ .found {
+   margin: auto;
+   padding-top: 1.225rem;
+   padding-bottom: 1.225rem;
+   text-align: left;
+ }
+ /* SEARCH */
+ .yellow-button {
+   color: #000;
+   padding: 2px 45px 2px 45px;
+   text-decoration: none;
+   font-size: 1.8rem;
+   font-weight: normal;
+ }
 }
 /* galioja nuo max iki 1200px  (md)*/
 @media (min-width:1200px) {
@@ -287,10 +409,7 @@ input[type=submit] {
 }
 
 
-/* about */
-#about .container-fluid {
-  padding: 1% 15%;
-}
+
 
 
 
@@ -510,21 +629,11 @@ input:focus::-webkit-input-placeholder {
   font-size: 1rem;
 }
 
-
-
-
 .others {
   color: #000;
 }
 
-/* button */
-.yellow-button {
-  color: #000;
-  padding: 2px 45px 2px 45px;
-  text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: normal;
-}
+
 
 /* CITE US */
 .italic {
@@ -545,51 +654,7 @@ input:focus::-webkit-input-placeholder {
   align-items: center;
 }
 
-.circle {
-  height: 5rem;
-  width: 5rem;
-  border-radius: 50%;
-  background-color: #7BA8AE;
-  color: #FFF;
-  text-align: center;
-  line-height: 1;
-  padding: 27px 1px 1px 1px;
-  text-decoration: none;
-  font-size: 80%;
-  position: fixed;
-  right: 1rem;
-  bottom: 5rem;
-}
 
-.circle-big {
-  height: 7rem;
-  width: 7rem;
-  border-radius: 50%;
-  background-color: #7BA8AE;
-  color: #FFF;
-  text-align: center;
-  line-height: 1;
-  padding: 47px 1px 1px 1px;
-  text-decoration: none;
-  font-size: 95%;
-  /* position: absolute;
-   left: 50%;
-   margin-left: -50px;
-   top: 50%;
-   margin-top: -50px; */
-}
-
-.found {
-  margin: auto;
-  padding-top: 1.225rem;
-  padding-bottom: 1.225rem;
-  text-align: left;
-}
-
-.results-img {
-  height: 60%;
-  width: 60%;
-}
 
 /* LOGIN */
 .empty-space5 {
