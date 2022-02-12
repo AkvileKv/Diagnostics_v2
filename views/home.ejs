@@ -66,7 +66,9 @@
         <!-- <a id="readMore2" href="#">Read more </a> -->
       </div>
     </div>
-    <!-- <a id="readMore" href="#1">Read more...</a> -->
+    <div class="readMoreclass">
+          <a id="readMore" href="#1">Read more...</a>
+    </div>
     <a class="carousel-control-prev" href="#carouselAbout" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon"></span>
     </a>
@@ -184,7 +186,7 @@
   $('#readMore').click(function(e) {
     e.stopPropagation();
     $('.justify').css({
-        'height': 'auto'
+        'height': 'auto',
     })
 });
 
@@ -193,6 +195,21 @@ $(document).click(function() {
         'height': '120px'
     })
 })
+
+$('#readMore').click(function(e) {
+  e.stopPropagation();
+  $('#readMore').css({
+      'display': 'none',
+  })
+});
+
+$(document).click(function() {
+  $('#readMore').css({
+      'display': 'block'
+  })
+})
+
+
 </script>
 
 
