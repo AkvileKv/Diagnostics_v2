@@ -9,6 +9,7 @@ const {
 } = require('uuid'); // uuid, To call: uuidv4();
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
+const helmet = require('helmet');
 var fs = require('file-system');
 const fileUpload = require('express-fileupload');
 
@@ -24,9 +25,9 @@ const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
 const notFund404_adminRouter = require('./controllers/404-admin');
-//const searchByWordRouter = require('./controllers/search-by-word');
 
 const app = express();
+app.use(helmet());
 
 app.set('view engine', 'ejs');
 
