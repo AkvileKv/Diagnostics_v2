@@ -29,6 +29,17 @@ const notFund404_adminRouter = require('./controllers/404-admin');
 const app = express();
 app.use(helmet());
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'code.jquery.com', 'ajax.googleapis.com', 'maxcdn.bootstrapcdn.com',
+       "cdn.jsdelivr.net", "kit.fontawesome.com"],
+      connectSrc: ["'self'", "https://ka-f.fontawesome.com"],
+    },
+  })
+);
+
 app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
