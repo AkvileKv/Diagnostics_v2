@@ -146,12 +146,13 @@ app.get("/search-central-asia", (req, res) => {
       allSpecies.push(neptis[i].species);
       console.log(allSpecies[i]);
       }
-      res.render("s-central-asia", {
-        dataArray: JSON.stringify(allSpecies)
-      });
+       res.render("s-central-asia", {
+         dataArray: JSON.stringify(allSpecies)
+       });
     }
   });
 });
+
 app.get("/search-central-america", (req, res) => {
 
   let defaultRegion = "Central America";

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
+
 function autocomplete(inp, arr) {
   var currentFocus;
   inp.addEventListener("input", function(e) {
@@ -64,7 +65,16 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 }
-var dataArray = [aba, taba, kaba, naba];
-autocomplete(document.getElementById("myInputSpecies"), dataArray);
+
+ var data2 = document.getElementById("dataArray2").value;
+
+ var allSpecies=[];
+ for(i=0; i<data2.length; i++)
+ {
+ allSpecies.push(data2[i].species);
+ }
+ // var data2 = ["turbatrix","raikhonae","bicolor","hissariella","kopetdagica","semiaurea","melanoptera","klimeschi"];
+
+autocomplete(document.getElementById("myInputSpecies2"), document.getElementById("dataArray2").value);
 
 });
