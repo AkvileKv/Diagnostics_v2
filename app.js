@@ -147,7 +147,7 @@ app.get("/search-central-asia", (req, res) => {
       console.log(allSpecies[i]);
       }
        res.render("s-central-asia", {
-         dataArray: JSON.stringify(allSpecies)
+          dataArray: JSON.stringify(allSpecies)
        });
     }
   });

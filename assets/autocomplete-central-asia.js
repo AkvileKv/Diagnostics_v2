@@ -65,15 +65,15 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 }
-
- var data2 = document.getElementById("dataArray2").value;
-
- var allSpecies=[];
- for(i=0; i<data2.length; i++)
- {
- allSpecies.push(data2[i].species);
- }
- // var data2 = ["turbatrix","raikhonae","bicolor","hissariella","kopetdagica","semiaurea","melanoptera","klimeschi"];
+var data2 = [];
+data2 = document.getElementById("dataArray2").value;
+// var a = JSON.stringify(data2);
+ // var allSpecies=[];
+ // for(i=0; i<data2.length; i++)
+ // {
+ // allSpecies.push(data2[i].species);
+ // }
+  //var data2 = ["turbatrix","raikhonae","bicolor","hissariella","kopetdagica","semiaurea","melanoptera","klimeschi"];
 
 autocomplete(document.getElementById("myInputSpecies2"), document.getElementById("dataArray2").value);
 
