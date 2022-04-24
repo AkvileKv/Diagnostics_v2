@@ -21,7 +21,6 @@ const citeRouter = require('./controllers/cite-us');
 const contactRouter = require('./controllers/contact-us');
 const searchRouter = require('./controllers/search');
 const loginRouter = require('./controllers/login');
-const registerRouter = require('./controllers/register');
 const notFund404Router = require('./controllers/404');
 const notFund404_userRouter = require('./controllers/404-user');
 const notFund404_adminRouter = require('./controllers/404-admin');
@@ -35,7 +34,7 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", 'code.jquery.com', 'ajax.googleapis.com', 'maxcdn.bootstrapcdn.com',
        "cdn.jsdelivr.net", "kit.fontawesome.com"],
-      connectSrc: ["'self'", "https://ka-f.fontawesome.com"],
+      connectSrc: ["'self'", "https://ka-f.fontawesome.com", "https://use.fontawesome.com"],
     },
   })
 );
@@ -51,7 +50,6 @@ app.use("/", homeRouter);
 app.use("/cite-us", citeRouter);
 app.use("/contact-us", contactRouter);
 app.use("/login", loginRouter);
-app.use("/register", registerRouter);
 app.use("/404", notFund404Router);
 app.use("/404-user", notFund404_userRouter);
 app.use("/404-admin", notFund404_adminRouter);
@@ -95,35 +93,39 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.post("/register", (req, res) => {
+// app.post("/register", (req, res) => {
+//
+//   User.findOne({
+//     username: req.body.username
+//   }, function(err, user) {
+//     if (err) {
+//       console.log(err);
+//     }
+//     if (user) {
+//       console.log("User exists");
+//       res.redirect("/register");
+//     } else {
+//       User.register({
+//         username: req.body.username,
+//         role: "user"
+//       }, req.body.password, function(err, user) {
+//         if (err) {
+//           console.log(err);
+//           res.redirect("/register");
+//         } else {
+//           passport.authenticate("local")(req, res, function() {
+//             res.redirect("/all-records");
+//           });
+//         }
+//       });
+//     }
+//   });
+//
+// });
 
-  User.findOne({
-    username: req.body.username
-  }, function(err, user) {
-    if (err) {
-      console.log(err);
-    }
-    if (user) {
-      console.log("User exists");
-      res.redirect("/register");
-    } else {
-      User.register({
-        username: req.body.username,
-        role: "user"
-      }, req.body.password, function(err, user) {
-        if (err) {
-          console.log(err);
-          res.redirect("/register");
-        } else {
-          passport.authenticate("local")(req, res, function() {
-            res.redirect("/all-records");
-          });
-        }
-      });
-    }
-  });
-
-});
+// app.get("/register", (req, res) => {
+//   res.render("register");
+// });
 
 app.get("/logout", function(req, res) {
   req.logout();
@@ -144,10 +146,10 @@ app.get("/search-central-asia", (req, res) => {
       for(i=0; i<neptis.length; i++)
       {
       allSpecies.push(neptis[i].species);
-      console.log(allSpecies[i]);
+      // console.log(allSpecies[i]);
       }
        res.render("s-central-asia", {
-          dataArray: JSON.stringify(allSpecies)
+          dataArray: allSpecies
        });
     }
   });
@@ -167,10 +169,10 @@ app.get("/search-central-america", (req, res) => {
       for(i=0; i<neptis.length; i++)
       {
       allSpecies.push(neptis[i].species);
-       console.log(allSpecies[i]);
+       //console.log(allSpecies[i]);
       }
       res.render("s-central-america", {
-        dataArray: JSON.stringify(allSpecies)
+        dataArray: allSpecies
       });
     }
   });
@@ -188,10 +190,10 @@ app.get("/search-continental-east-asia", (req, res) => {
       for(i=0; i<neptis.length; i++)
       {
       allSpecies.push(neptis[i].species);
-       console.log(allSpecies[i]);
+       //console.log(allSpecies[i]);
       }
       res.render("s-continental-east-asia", {
-        dataArray: JSON.stringify(allSpecies)
+        dataArray: allSpecies
       });
     }
   });
@@ -210,10 +212,10 @@ app.get("/search-south-america", (req, res) => {
       for(i=0; i<neptis.length; i++)
       {
       allSpecies.push(neptis[i].species);
-       console.log(allSpecies[i]);
+       //console.log(allSpecies[i]);
       }
       res.render("s-south-america", {
-        dataArray: JSON.stringify(allSpecies)
+        dataArray: allSpecies
       });
     }
   });
@@ -231,10 +233,10 @@ app.get("/search-the-himalaya", (req, res) => {
       for(i=0; i<neptis.length; i++)
       {
       allSpecies.push(neptis[i].species);
-       console.log(allSpecies[i]);
+       //console.log(allSpecies[i]);
       }
       res.render("s-the-himalaya", {
-        dataArray: JSON.stringify(allSpecies)
+        dataArray: allSpecies
       });
     }
   });
