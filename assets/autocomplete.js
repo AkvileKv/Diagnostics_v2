@@ -65,23 +65,9 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 }
-// var data2 = [];
+
 var data = document.getElementById("dataArray").value;
 var myArray = data.split(",");
-
-console.log(data);
-console.log(myArray);
-
-//neperduoda kaip masyvo, reikia atskirti dirbtinai !!!
-
-// var a = JSON.stringify(data2);
-// var allSpecies=[];
-// for(i=0; i<data2.length; i++)
-// {
-// allSpecies.push(data2[i].species);
-// }
-//var data2 = ["t", "u", "r", "b", "a", "t", "r", "i", "x","r", "a", "i", "k", "h", "o", "n", "a", "e","bicolor","hissariella","kopetdagica","semiaurea","melanoptera","klimeschi"];
-//var data = ["kljhjkhjkhjk a hkjlhkjhkjk"];
 
 autocomplete(document.getElementById("myInputSpecies"), myArray);
 
